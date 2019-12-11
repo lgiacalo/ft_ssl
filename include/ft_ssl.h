@@ -40,7 +40,7 @@ typedef struct		s_arg
 {
 	char		*name;
 	char		*str;
-	char		*checksum;
+	char		checksum[32];
 	struct s_arg	*next;
 }			t_arg;
 
@@ -54,6 +54,26 @@ typedef struct		s_ssl
 
 t_ssl	*getssl(void);
 void	init_ssl(void);
+
+/*
+**	Parsing
+*/
+
+void	record(char **argv, int argc);
+int		record_option(char *str, int *opt);
+int		read_string(char *str);
+int		read_string_option(char *str);
+void	read_arguments(char *arg);
+void	read_stdin(void);
+int		record_commands(char *cmd);
+
+/*
+**	Function structure arg
+*/
+
+t_arg	*ft_lstnew_arg(char *name, char *str);
+void	ft_lstadd_arg(t_arg *new);
+
 
 /*
 **	Print Error

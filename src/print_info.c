@@ -13,7 +13,7 @@ void	print_ssl(void)
 	ssl = getssl();
 	ft_printf("***********Structure s_ssl***********\n");
 	ft_printf("Cmd:\t%s\n", ssl->cmd);
-	ft_printf("Opt:\t%b\n", ssl->opt);
+	ft_printf("Opt:\t%.4b\n", ssl->opt);
 	ft_printf("Ret:\t%i\n", ssl->ret);
 	ft_printf("List:\t%llx\n", ssl->list);
 	ft_printf("**************************************\n");
