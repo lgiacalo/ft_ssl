@@ -15,11 +15,14 @@ int	main(int argc, char **argv)
 	init_ssl();
 	if (record_commands(argv[1]))
 		return (print_usage_commands(argv[1]));
-	ft_printf("cmd : [%s]\n", getssl()->cmd);
 	
+	ft_printf("\n");
 	if (argc == 2)
 		read_stdin();
 	else
 		record(argv, argc);
+	//gestion ssl checksum !!
+	print_ssl();
+	print_arg_list();
 	return (0);
 }

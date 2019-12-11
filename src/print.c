@@ -1,5 +1,12 @@
 #include "ft_ssl.h"
 
+int	print_no_file(char *str)
+{
+	ft_printf("ft_ssl: %s: No such file or directory\n", str);
+	getssl()->ret = 1;
+	return (1);
+}
+
 int	print_requires_args(char opt)
 {
 	ft_printf("ft_ssl: option requires an argument -- %c\n", opt);
