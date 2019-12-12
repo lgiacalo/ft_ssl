@@ -12,6 +12,12 @@
 
 #include "../include/ft_printf.h"
 
+static void	color(char *color, int size, int fd, unsigned int *i)
+{
+	ft_putstr_fd_nb(color, fd);
+	*i += size - 1;
+}
+
 static int	ft_search(const char *format, va_list ap, unsigned int *i, int fd)
 {
 	t_flags			*flags;
@@ -46,19 +52,19 @@ static int	ft_color(const char *format, unsigned int *i, int fd)
 
 	count = 8;
 	if (!ft_strncmp((format + *i), "{red}", 5))
-		COLOR(PF_RED, 5, fd);
+		color(PF_RED, 5, fd, i);
 	else if (!ft_strncmp((format + *i), "{green}", 7))
-		COLOR(PF_GREEN, 7, fd);
+		color(PF_GREEN, 7, fd, i);
 	else if (!ft_strncmp((format + *i), "{yellow}", 8))
-		COLOR(PF_YELLOW, 8, fd);
+		color(PF_YELLOW, 8, fd, i);
 	else if (!ft_strncmp((format + *i), "{blue}", 6))
-		COLOR(PF_BLUE, 6, fd);
+		color(PF_BLUE, 6, fd, i);
 	else if (!ft_strncmp((format + *i), "{purple}", 8))
-		COLOR(PF_PURPLE, 8, fd);
+		color(PF_PURPLE, 8, fd, i);
 	else if (!ft_strncmp((format + *i), "{cyan}", 6))
-		COLOR(PF_CYAN, 6, fd);
+		color(PF_CYAN, 6, fd, i);
 	else if (!ft_strncmp((format + *i), "{eoc}", 5))
-		COLOR(PF_EOC, 5, fd);
+		color(PF_EOC, 5, fd, i);
 	else
 		count = ft_putchar_fd(format[*i], fd);
 	return (count);

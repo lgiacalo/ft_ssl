@@ -13,7 +13,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# define ABS(x) ((x) < 0 ? ((x) * -1) : (x))
 # define BUFF_SIZE 96
 
 # include <stdlib.h>
