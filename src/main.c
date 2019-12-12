@@ -24,5 +24,6 @@ int	main(int argc, char **argv)
 	//gestion ssl checksum !!
 	print_ssl();
 	print_arg_list();
+	print_sizeof();
 	return (0);
 }

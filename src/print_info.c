@@ -44,3 +44,16 @@ void	print_arg_list(void)
 	}
 	ft_printf("***************************************\n");
 }
+
+void	print_sizeof(void)
+{
+	ft_printf("\n**************** Sizeof ***************\n");
+	ft_printf("Char:\t\t%u octet\n", sizeof(char));
+	ft_printf("Char*:\t\t%u octets\n", sizeof(char*));
+	ft_printf("Int:\t\t%u octets\n", sizeof(int));
+	ft_printf("Int*:\t\t%u octets\n", sizeof(int*));
+	ft_printf("Unsigned int:\t%u octets\n", sizeof(unsigned int));
+	ft_printf("Long int:\t%u octets\n", sizeof(long int));
+	ft_printf("Long long int:\t%u octets\n", sizeof(long long int));
+	ft_printf("***************************************\n");
+}

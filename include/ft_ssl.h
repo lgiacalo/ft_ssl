@@ -98,5 +98,6 @@ void	print_ssl(void);
 void	print_arg_list(void);
 void	print_arg(t_arg *list);
 void	print_all(void);
+void	print_sizeof(void);
 
 #endif
