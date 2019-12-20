@@ -4,11 +4,51 @@ void	MD5_transform(int	*block)
 {
 	print_block((char *)block);
 	ft_printf("Function MD5_transform\n");
-
 	ft_printf("string: %i[", getssl()->size);
-	for (int i = 0; i < getssl()->size; i++)
-		for (int j = 0; j < 4; j++)
-			ft_printf("%c", (char)((char *)(&(block[i])))[j]);
+
+
+	t_ssl	*ssl;
+	int		state_temp[4], tmp, func, ind;
+
+	ssl = getssl();
+	ft_memcpy(state_temp, ssl->state, (sizeof(int) * 4));
+
+	for (int i = 0; i < 64; i++)
+	{
+		if (i < 16)
+		{
+			func = func_f(state_temp[1], state_temp[2] , state_temp[3]);
+			ind = i;
+		}
+		else if (i < 32)
+		{
+			func = func_g(state_temp[1], state_temp[2], state_temp[3]);
+			ind = (5 * i + 1) % 16;
+		}
+		else if (i < 48)
+		{
+			func = func_h(state_temp[1], state_temp[2], state_temp[3]);
+			ind = (3 * i + 5) % 16;
+		}
+		else
+		{
+			func = func_i(state_temp[1], state_temp[2], state_temp[3]);
+			ind = (7 * i) % 16;
+		}
+
+		tmp = state_temp[3]; 
+		state_temp[3] = state_temp[2]; 
+		state_temp[2] = state_temp[1]; 
+		state_temp[1] = rotate_left(state_temp[0] + func + k[i] + block[ind], r[i]) + state_temp[1];
+		state_temp[0] = tmp;
+
+	}
+
+	for (int i = 0; i < 4; i++)
+		ssl->state[i] += state_temp[i];
+
+	print_state(getssl()->state);
+	// print_state(state_temp);
 
 }
 

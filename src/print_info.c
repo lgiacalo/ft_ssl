@@ -77,8 +77,24 @@ void	print_block(char *block)
 	ft_printf("\n");
 }
 
+void	print_state(int state[4])
+{
+	ft_printf("\n********** Display State: **********\n");
+	for (int i = 0; i < 4; i++)
+		ft_printf("%c: %#.8x\n", (int)('A') + i, state[i]);
+	ft_printf("\n************************************\n");
+}
 
-
+void	print_sinus(void)
+{
+	ft_printf("\n********** Display State: **********\n");
+	for (int i = 0; i < 64; i++)
+	{
+		if (i && !(i % 16))
+			ft_printf("\n");
+		ft_printf("%#.8x ", k[i]);
+	}
+}
 
 
 

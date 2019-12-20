@@ -13,6 +13,8 @@ void MD5Init (MD5_CTX *context)
 	context->state[1] = 0xefcdab89;
 	context->state[2] = 0x98badcfe;
 	context->state[3] = 0x10325476;
+
+  print_state(context->state);
 }
 
 /* MD5 block update operation. Continues an MD5 message-digest
@@ -167,6 +169,8 @@ static void MD5Transform (UINT4 state[4], unsigned char block[64])
 	state[1] += b;
 	state[2] += c;
 	state[3] += d;
+
+  print_state(state);
 
 	/* Zeroize sensitive information.
 	*/

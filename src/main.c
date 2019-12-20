@@ -14,16 +14,18 @@ int	main(int argc, char **argv)
 		printf("args %i: [%s]\n", i, argv[i]);
 
 	init_ssl();
+	print_sinus();
 	if (record_commands(argv[1]))
 		return (print_usage_commands(argv[1]));
 
 	ft_printf("\n");
+	print_state(getssl()->state);
 	if (argc == 2)
 		read_stdin();
 	else
 		record(argv, argc);
 	//gestion ssl checksum !!
-	print_ssl();
+	// print_ssl();
 	// print_sizeof();
 
 	ft_printf("\nReal md5: \n");
