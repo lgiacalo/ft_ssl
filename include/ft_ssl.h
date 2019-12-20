@@ -17,6 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+int md5_real (int argc, char **argv);
+
+
 # include "libft.h"
 
 /*
@@ -36,6 +39,22 @@
 # define OPT_S		(1 << 2)
 # define OPT_R		(1 << 3)
 
+/*
+**	Constantes
+*/
+
+# define STATE0		0x01234567
+# define STATE1		0x89abcdef
+# define STATE2		0xfedcba98
+# define STATE3		0x76543210
+
+static unsigned char PADDING[64] = {
+ 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+
+
 typedef struct		s_arg
 {
 	char			*name;
@@ -49,6 +68,9 @@ typedef struct		s_ssl
 	char			*cmd;
 	int				opt;
 	int				ret;
+	int 			state[4];
+	long int 		size;
+	char			buf[64];
 	struct s_arg	*list;
 }					t_ssl;
 
@@ -58,6 +80,8 @@ typedef struct		s_ssl
 
 t_ssl	*getssl(void);
 void	init_ssl(void);
+void	clean_ssl(void);
+
 
 /*
 **	Function structure arg
@@ -87,6 +111,8 @@ int 	func_g(int b, int c, int d);
 int 	func_h(int b, int c, int d);
 int 	func_i(int b, int c, int d);
 
+int		rotate_left(int x, int n);
+
 
 /*
 **	Print Error
@@ -108,5 +134,7 @@ void	print_arg_list(void);
 void	print_arg(t_arg *list);
 void	print_all(void);
 void	print_sizeof(void);
+void	print_block(char *block);
+
 
 #endif

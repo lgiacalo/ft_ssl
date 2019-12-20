@@ -6,6 +6,7 @@ int	main(int argc, char **argv)
 {
 	int	i;
 
+
 	i = -1;
 	if (argc == 1)
 		return (print_usage());
@@ -15,7 +16,7 @@ int	main(int argc, char **argv)
 	init_ssl();
 	if (record_commands(argv[1]))
 		return (print_usage_commands(argv[1]));
-	
+
 	ft_printf("\n");
 	if (argc == 2)
 		read_stdin();
@@ -23,7 +24,11 @@ int	main(int argc, char **argv)
 		record(argv, argc);
 	//gestion ssl checksum !!
 	print_ssl();
-	print_arg_list();
-	print_sizeof();
+	// print_sizeof();
+
+	ft_printf("\nReal md5: \n");
+	md5_real(argc,argv);
+
+
 	return (0);
 }

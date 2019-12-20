@@ -8,6 +8,19 @@ t_ssl	*getssl(void)
 	return (&ssl);
 }
 
+void	clean_ssl(void)
+{
+	t_ssl	*ssl;
+
+	ssl = getssl();
+	ssl->state[0] = STATE0;
+	ssl->state[1] = STATE1;
+	ssl->state[2] = STATE2;
+	ssl->state[3] = STATE3;
+	ssl->size = 0;
+	ft_bzero(ssl->buf, 64);
+}
+
 void	init_ssl(void)
 {
 	t_ssl	*ssl;
@@ -17,6 +30,12 @@ void	init_ssl(void)
 	ssl->opt = 0;
 	ssl->list = NULL;
 	ssl->ret = 0;
+	ssl->state[0] = STATE0;
+	ssl->state[1] = STATE1;
+	ssl->state[2] = STATE2;
+	ssl->state[3] = STATE3;
+	ssl->size = 0;
+	ft_bzero(ssl->buf, 64);
 }
 
 void	ft_lstadd_arg(t_arg *new)

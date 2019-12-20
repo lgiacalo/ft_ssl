@@ -31,11 +31,12 @@ INC_PATH	= ./include/
 
 SRC_SSL		= main.c struct_ssl.c\
 				parsing.c parsing_option_s.c parsing_args.c\
-				print.c print_info.c
+				print.c print_info.c\
+				cp.c
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))
 
-INC_SSL		= ft_ssl.h
+INC_SSL		= ft_ssl.h cp.h
 
 LIB		= libft/libft.a
 
