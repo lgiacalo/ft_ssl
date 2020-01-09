@@ -77,7 +77,7 @@ void	print_block(char *block)
 	ft_printf("\n");
 }
 
-void	print_state(int state[4])
+void	print_state(unsigned int state[4])
 {
 	ft_printf("\n********** Display State: **********\n");
 	for (int i = 0; i < 4; i++)
@@ -123,7 +123,7 @@ void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin)
 	ft_printf("************************************\n");
 }
 
-void	print_info_func(int state[4], int x, int i, int s, int sin)
+void	print_info_func(unsigned int state[4], int x, int i, int s, int sin)
 {
 	ft_printf("\n********** Display Info func: **********\n");
 	for (int i = 0; i < 4; i++)

@@ -20,9 +20,31 @@ int 	func_i(int b, int c, int d)
 	return ((c) ^ ((b) | (~d)));
 }
 
-int		rotate_left(int x, int n)
+int		rotate_left(unsigned int x, int n)
 {
 	return (((x) << (n)) | ((x) >> (32-(n))));
 }
 
-//ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32-(n))))
+unsigned int		reverse(unsigned int block)
+{
+	unsigned int ret;
+
+	ret = 0;
+	ret += block << 24 & 0xff000000;
+	ret += block << 8 & 0xff0000;
+	ret += block >> 8 & 0xff00;
+	ret += block >> 24 & 0xff;
+	return (ret);
+}
+
+void	reverse_block(unsigned int *block)
+{
+	int	i; 
+
+	i = 0;
+	while (i < 4)
+	{
+		block[i] = reverse(block[i]);
+		i++;
+	}
+}

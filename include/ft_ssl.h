@@ -97,7 +97,7 @@ typedef struct		s_ssl
 	char			*cmd;
 	int				opt;
 	int				ret;
-	int 			state[4];
+	unsigned int 	state[4];
 	long int 		size;
 	char			buf[64];
 	struct s_arg	*list;
@@ -136,6 +136,8 @@ int		read_string_option(char *str);
 int		read_arguments(char *arg);
 void	read_stdin(void);
 int		record_commands(char *cmd);
+int		record_string(char *str);
+
 
 /*
 **	Functions non lineaire MD5
@@ -146,7 +148,20 @@ int 	func_g(int b, int c, int d);
 int 	func_h(int b, int c, int d);
 int 	func_i(int b, int c, int d);
 
-int		rotate_left(int x, int n);
+ int		rotate_left(unsigned int x, int n);
+
+unsigned int		reverse(unsigned int block);
+void	reverse_block(unsigned int *block);
+
+
+
+/*
+**	Gestion MD5
+*/
+
+void	gestion_block(char *block, unsigned int size);
+void	gestion_last_block(char *block, unsigned int size);
+
 
 
 /*
@@ -170,11 +185,11 @@ void	print_arg(t_arg *list);
 void	print_all(void);
 void	print_sizeof(void);
 void	print_block(char *block);
-void	print_state(int state[4]);
+void	print_state(unsigned int state[4]);
 void	print_state_4int(int a, int b, int c, int d);
 void	print_sinus(void);
 void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
-void	print_info_func(int state[4], int x, int i, int s, int sin);
+void	print_info_func(unsigned int state[4], int x, int i, int s, int sin);
 
 
 

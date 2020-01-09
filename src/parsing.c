@@ -1,6 +1,21 @@
 #include "ft_ssl.h"
 
 
+int	record_string(char *str)
+{
+	ft_printf("Read string: [%s]\n", str);
+	size_t	size;
+	t_ssl			*ssl;
+
+	ssl = getssl();
+	size = ft_strlen(str);
+	gestion_block(str, size);
+	gestion_last_block(str, size);
+
+	//TODO: gestion affichage
+	ft_printf("Resultat : %.8x%.8x%.8x%.8x\n", (ssl->state[0]), (ssl->state[1]), (ssl->state[2]), (ssl->state[3]));
+	return (0);
+}
 
 void	read_stdin(void)
 {
