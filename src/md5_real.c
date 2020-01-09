@@ -17,6 +17,8 @@ void MD5Init (MD5_CTX *context)
   print_state(context->state);
 }
 
+
+
 /* MD5 block update operation. Continues an MD5 message-digest
    operation, processing another message block, and updating the
    context.
@@ -57,6 +59,8 @@ void MD5Update (MD5_CTX *context, unsigned char *input, unsigned int inputLen)
 		 inputLen-i);
 }
 
+
+
 /* MD5 finalization. Ends an MD5 message-digest operation, writing the
    the message digest and zeroizing the context.
    */
@@ -84,6 +88,8 @@ void MD5Final (unsigned char digest[16], MD5_CTX *context)
 	MD5_memset ((POINTER)context, 0, sizeof (*context));
 }
 
+
+
 /* MD5 basic transformation. Transforms state based on block.
 */
 static void MD5Transform (UINT4 state[4], unsigned char block[64])
@@ -94,22 +100,58 @@ static void MD5Transform (UINT4 state[4], unsigned char block[64])
 	Decode (x, block, 64);
 
 	/* Round 1 */
+  // print_info_func4(a, b, c, d, x[0], 0, S11, 0xd76aa478);
 	FF (a, b, c, d, x[ 0], S11, 0xd76aa478); /* 1 */
+  // print_state_4int(d, a, b, c);
+
+  // print_info_func4(d, a, b, c, x[1], 1, S12, 0xe8c7b756);
 	FF (d, a, b, c, x[ 1], S12, 0xe8c7b756); /* 2 */
+  // print_state_4int(c, d, a, b);
+
+  // print_info_func4(c, d, a, b, x[2], 2, S13, 0x242070db);
 	FF (c, d, a, b, x[ 2], S13, 0x242070db); /* 3 */
+  // print_state_4int(b, c, d, a);
+
+  // print_info_func4(b, c, d, a, x[3], 3, S14, 0xc1bdceee);
 	FF (b, c, d, a, x[ 3], S14, 0xc1bdceee); /* 4 */
+  // print_state_4int(a, b, c, d);
+
+  // print_info_func4(a, b, c, d, x[4], 4, S11, 0xf57c0faf);
 	FF (a, b, c, d, x[ 4], S11, 0xf57c0faf); /* 5 */
+  // print_state_4int(d, a, b, c);
+
 	FF (d, a, b, c, x[ 5], S12, 0x4787c62a); /* 6 */
+  // print_state_4int(c, d, a, b);
+
 	FF (c, d, a, b, x[ 6], S13, 0xa8304613); /* 7 */
+  // print_state_4int(b, c, d, a);
+
 	FF (b, c, d, a, x[ 7], S14, 0xfd469501); /* 8 */
+  // print_state_4int(a, b, c, d);
+
 	FF (a, b, c, d, x[ 8], S11, 0x698098d8); /* 9 */
+  // print_state_4int(d, a, b, c);
+
 	FF (d, a, b, c, x[ 9], S12, 0x8b44f7af); /* 10 */
+  // print_state_4int(c, d, a, b);
+
 	FF (c, d, a, b, x[10], S13, 0xffff5bb1); /* 11 */
-	FF (b, c, d, a, x[11], S14, 0x895cd7be); /* 12 */
+  // print_state_4int(b, c, d, a);
+	
+  FF (b, c, d, a, x[11], S14, 0x895cd7be); /* 12 */
+  // print_state_4int(a, b, c, d);
+
 	FF (a, b, c, d, x[12], S11, 0x6b901122); /* 13 */
+  // print_state_4int(d, a, b, c);
+
 	FF (d, a, b, c, x[13], S12, 0xfd987193); /* 14 */
+  // print_state_4int(c, d, a, b);
+
 	FF (c, d, a, b, x[14], S13, 0xa679438e); /* 15 */
+  // print_state_4int(b, c, d, a);
+
 	FF (b, c, d, a, x[15], S14, 0x49b40821); /* 16 */
+  // print_state_4int(a, b, c, d);
 
 	/* Round 2 */
 	GG (a, b, c, d, x[ 1], S21, 0xf61e2562); /* 17 */
@@ -165,17 +207,24 @@ static void MD5Transform (UINT4 state[4], unsigned char block[64])
 	II (c, d, a, b, x[ 2], S43, 0x2ad7d2bb); /* 63 */
 	II (b, c, d, a, x[ 9], S44, 0xeb86d391); /* 64 */
 
+  ft_printf("\nav End");
+  print_state_4int(a, b, c, d);
+
+
 	state[0] += a;
 	state[1] += b;
 	state[2] += c;
 	state[3] += d;
 
+  ft_printf("\nEnd\n");
   print_state(state);
 
 	/* Zeroize sensitive information.
 	*/
 	MD5_memset ((POINTER)x, 0, sizeof (x));
 }
+
+
 
 /* Encodes input (UINT4) into output (unsigned char). Assumes len is
    a multiple of 4.
@@ -194,6 +243,8 @@ static void Encode (output, input, len)
 		output[j+3] = (unsigned char)((input[i] >> 24) & 0xff);
 	}
 }
+
+
 
 /* Decodes input (unsigned char) into output (UINT4). Assumes len is
    a multiple of 4.
@@ -253,8 +304,8 @@ int md5_real (argc, argv)
 {
 	int i;
 
-	if (argc > 1)
-		for (i = 1; i < argc; i++)
+	if (argc > 2)
+		for (i = 2; i < argc; i++)
 			if (argv[i][0] == '-' && argv[i][1] == 's')
 				MDString (argv[i] + 2);
 			else if (strcmp (argv[i], "-t") == 0)
@@ -269,6 +320,8 @@ int md5_real (argc, argv)
 	return (0);
 }
 
+
+
 /* Digests a string and prints the result.
 */
 static void MDString (string)
@@ -277,12 +330,14 @@ static void MDString (string)
 	MD_CTX context;
 	unsigned char digest[16];
 	unsigned int len = strlen (string);
+  ft_printf("MD555 (\"%s\") = ", string);
+
 
 	MDInit (&context);
 	MDUpdate (&context, string, len);
 	MDFinal (digest, &context);
 
-	printf ("MD%d (\"%s\") = ", MD, string);
+  ft_printf("MD5 (\"%s\") = ", string);
 	MDPrint (digest);
 	printf ("\n");
 }

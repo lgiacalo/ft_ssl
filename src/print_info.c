@@ -82,20 +82,58 @@ void	print_state(int state[4])
 	ft_printf("\n********** Display State: **********\n");
 	for (int i = 0; i < 4; i++)
 		ft_printf("%c: %#.8x\n", (int)('A') + i, state[i]);
-	ft_printf("\n************************************\n");
+	ft_printf("************************************\n");
+	ft_printf("************************************\n");
+}
+
+void	print_state_4int(int a, int b, int c, int d)
+{
+	ft_printf("\n********** Display State: **********\n");
+	ft_printf("%c: %#.8x\n", (int)('A'), a);
+	ft_printf("%c: %#.8x\n", (int)('B'), b);
+	ft_printf("%c: %#.8x\n", (int)('C'), c);
+	ft_printf("%c: %#.8x\n", (int)('D'), d);
+	ft_printf("************************************\n");
+	ft_printf("************************************\n");
 }
 
 void	print_sinus(void)
 {
-	ft_printf("\n********** Display State: **********\n");
+	ft_printf("\n********************** Display State: **********************\n");
 	for (int i = 0; i < 64; i++)
 	{
 		if (i && !(i % 16))
 			ft_printf("\n");
 		ft_printf("%#.8x ", k[i]);
 	}
+	ft_printf("\n***********************************************************\n\n");
 }
 
+void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin)
+{
+	ft_printf("\n********** Display Info func: **********\n");
+	ft_printf("%c: %#.8x\n", (int)('A'), a);
+	ft_printf("%c: %#.8x\n", (int)('B'), b);
+	ft_printf("%c: %#.8x\n", (int)('C'), c);
+	ft_printf("%c: %#.8x\n", (int)('D'), d);
+	ft_printf("x[%d] = [%d]\n", i, x);
+	ft_printf("SS = [%d]\n", s);
+	ft_printf("Sin: %#.8x\n", sin);
+
+	ft_printf("************************************\n");
+}
+
+void	print_info_func(int state[4], int x, int i, int s, int sin)
+{
+	ft_printf("\n********** Display Info func: **********\n");
+	for (int i = 0; i < 4; i++)
+		ft_printf("%c: %#.8x\n", (int)('A') + i, state[i]);
+	ft_printf("x[%d] = [%d]\n", i, x);
+	ft_printf("SS = [%d]\n", s);
+	ft_printf("Sin: %#.8x\n", sin);
+
+	ft_printf("\n************************************\n");
+}
 
 
 

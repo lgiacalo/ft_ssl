@@ -22,5 +22,7 @@ int 	func_i(int b, int c, int d)
 
 int		rotate_left(int x, int n)
 {
-	return (((x) << (n)) | ((x) >> (32 - (n))));
+	return (((x) << (n)) | ((x) >> (32-(n))));
 }
+
+//ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32-(n))))

@@ -8,6 +8,24 @@ void	read_stdin(void)
 }
 
 
+int	read_string_option(char *str)
+{
+	getssl()->opt |= OPT_S;
+	if (str && !(str[1]))
+		return (-1);
+	else
+		record_string(str + 1);
+	return (0);
+}
+
+int	read_string(char *str)
+{
+	if (!str)
+		return (print_requires_args('s'));
+	record_string(str);
+	return (0);
+}
+
 int	record_option(char *str, int *opt)
 {
 	int	i;

@@ -1,6 +1,7 @@
 #include "ft_ssl.h"
 
-void	MD5_transform(int	*block)
+
+void	MD5_transform(unsigned int	*block)
 {
 	print_block((char *)block);
 	ft_printf("Function MD5_transform\n");
@@ -8,7 +9,8 @@ void	MD5_transform(int	*block)
 
 
 	t_ssl	*ssl;
-	int		state_temp[4], tmp, func, ind;
+	unsigned int		state_temp[4], tmp, func, ind;
+
 
 	ssl = getssl();
 	ft_memcpy(state_temp, ssl->state, (sizeof(int) * 4));
@@ -19,6 +21,7 @@ void	MD5_transform(int	*block)
 		{
 			func = func_f(state_temp[1], state_temp[2] , state_temp[3]);
 			ind = i;
+			// print_info_func(state_temp, block[ind], ind, r[i], k[i]);
 		}
 		else if (i < 32)
 		{
@@ -36,13 +39,27 @@ void	MD5_transform(int	*block)
 			ind = (7 * i) % 16;
 		}
 
-		tmp = state_temp[3]; 
-		state_temp[3] = state_temp[2]; 
-		state_temp[2] = state_temp[1]; 
-		state_temp[1] = rotate_left(state_temp[0] + func + k[i] + block[ind], r[i]) + state_temp[1];
-		state_temp[0] = tmp;
 
+		func = state_temp[0] + func + block[ind] + k[i];
+		state_temp[0] = state_temp[1] + ROTAT_LEFT(func, r[i]);
+
+
+		// state_temp[0] = state_temp[1] + ROTAT_LEFT(state_temp[0] + func + block[ind] + k[i], r[i]);
+
+		tmp = state_temp[0];
+		state_temp[0] = state_temp[3];
+		state_temp[3] = state_temp[2];
+		state_temp[2] = state_temp[1];
+		state_temp[1] = tmp;
+
+		// if (i < 6)
+		// {
+		// 	ft_printf("\nBoucle i = %d", i);
+		// 	print_state(state_temp);
+		// }
 	}
+
+	print_state(getssl()->state);
 
 	for (int i = 0; i < 4; i++)
 		ssl->state[i] += state_temp[i];
@@ -68,13 +85,13 @@ void	gestion_last_block(char *block, unsigned int size)
 
 	if (mod >= 56)
 	{
-		MD5_transform((int *)(&(ssl->buf[0])));
+		MD5_transform((unsigned int *)(&(ssl->buf[0])));
 		ft_bzero(ssl->buf, 64);
 		ft_memcpy(ssl->buf, PADDING + 1, 56);
 	}
 	ssl->size *= 8;
 	ft_memcpy(ssl->buf + 56, (char *)(&(ssl->size)), 8);
-	MD5_transform((int *)(&(ssl->buf[0])));
+	MD5_transform((unsigned int *)(&(ssl->buf[0])));
 
 }
 
@@ -106,23 +123,5 @@ int	record_string(char *str)
 	gestion_block(str, size);
 	gestion_last_block(str, size);
 
-	return (0);
-}
-
-int	read_string_option(char *str)
-{
-	getssl()->opt |= OPT_S;
-	if (str && !(str[1]))
-		return (-1);
-	else
-		record_string(str + 1);
-	return (0);
-}
-
-int	read_string(char *str)
-{
-	if (!str)
-		return (print_requires_args('s'));
-	record_string(str);
 	return (0);
 }

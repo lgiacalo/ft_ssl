@@ -20,6 +20,8 @@
 
 int md5_real (int argc, char **argv);
 
+#define ROTAT_LEFT(x, n) (((x) << (n)) | ((x) >> (32-(n))))
+
 
 # include "libft.h"
 
@@ -101,6 +103,12 @@ typedef struct		s_ssl
 	struct s_arg	*list;
 }					t_ssl;
 
+typedef struct		s_md5
+{
+	int 			bufint[16];
+	char			bufchar[64];
+}					t_md5;
+
 /*
 **	Function structure ssl
 */
@@ -163,7 +171,10 @@ void	print_all(void);
 void	print_sizeof(void);
 void	print_block(char *block);
 void	print_state(int state[4]);
+void	print_state_4int(int a, int b, int c, int d);
 void	print_sinus(void);
+void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
+void	print_info_func(int state[4], int x, int i, int s, int sin);
 
 
 

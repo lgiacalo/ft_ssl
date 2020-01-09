@@ -33,7 +33,7 @@ SRC_SSL		= main.c struct_ssl.c\
 				parsing.c parsing_option_s.c parsing_args.c\
 				print.c print_info.c\
 				functions_md5.c\
-				cp.c
+				md5_real.c
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))
 
@@ -48,7 +48,7 @@ ifeq ($(option), debug)
 	OPT += -g
 endif
 ifeq ($(option), alloc)
-	OPT += -g -fsanitize=address
+	CFLAGS = -g -fsanitize=address $(INCFLAG) 
 endif
 ifeq ($(option), opti)
 	OPT += -O3
