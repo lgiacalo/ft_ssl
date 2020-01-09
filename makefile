@@ -31,7 +31,9 @@ INC_PATH	= ./include/
 
 SRC_SSL		= main.c struct_ssl.c\
 				parsing.c parsing_args.c\
+				read_string.c\
 				md5.c functions_md5.c\
+				reverse.c\
 				print.c print_info.c\
 				md5_real.c
 

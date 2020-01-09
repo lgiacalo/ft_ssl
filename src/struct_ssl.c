@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_ssl.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/15 05:23:35 by lgiacalo          #+#    #+#             */
+/*   Updated: 2019/05/31 15:57:47 by lgiacalo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ssl.h"
 
@@ -51,7 +62,7 @@ void	ft_lstadd_arg(t_arg *new)
 		ssl->list = new;
 	else
 		tmp->next = new;
-	return;
+	return ;
 }
 
 t_arg	*ft_lstnew_arg(char *name, char *str)

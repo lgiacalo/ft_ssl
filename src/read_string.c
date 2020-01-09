@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   read_string.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,40 +12,36 @@
 
 #include "ft_ssl.h"
 
-int	print_no_file(char *str)
+int	gestion_string(char *str)
 {
-	ft_printf("ft_ssl: %s: No such file or directory\n", str);
-	getssl()->ret = 1;
-	return (1);
+	size_t	size;
+	t_ssl	*ssl;
+
+	ft_printf("Read string: [%s]\n", str);
+	ssl = getssl();
+	size = ft_strlen(str);
+	gestion_block(str, size);
+	gestion_last_block(str, size);
+	//TODO: gestion affichage
+	ft_printf("[\"%s\"] : %.8x%.8x%.8x%.8x\n", str, (ssl->state[0]), \
+		(ssl->state[1]), (ssl->state[2]), (ssl->state[3]));
+	clean_ssl();
+	return (0);
 }
 
-int	print_requires_args(char opt)
+int	read_string_option(char *str)
 {
-	ft_printf("ft_ssl: option requires an argument -- %c\n", opt);
-	print_usage();
-	getssl()->ret = 1;
-	return (1);
+	if (str && !(str[1]))
+		return (-1);
+	else
+		gestion_string(str + 1);
+	return (0);
 }
 
-int	print_illegal_option(char opt)
+int	read_string(char *str)
 {
-	ft_printf("ft_ssl: illegal option -- %c\n", opt);
-	print_usage();
-	getssl()->ret = 1;
-	return (1);
-}
-
-int	print_usage(void)
-{
-	ft_printf("Usage: ft_ssl commands [commands opt] [commands args]\n");
-	return (1);
-}
-
-int	print_usage_commands(char *cmd)
-{
-	ft_printf("ft_ssl: Error: '%s' is an invalid command.\n", cmd);
-	ft_printf("\nStandard commands:\n\n");
-	ft_printf("Message Digest commands:\nmd5\nsha256\n\n");
-	ft_printf("Cipher commands:\n");
-	return (1);
+	if (!str)
+		return (print_requires_args('s'));
+	gestion_string(str);
+	return (0);
 }

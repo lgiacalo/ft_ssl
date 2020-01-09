@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,51 +12,26 @@
 
 #include "ft_ssl.h"
 
-
-void	read_stdin(void)
+unsigned int	reverse(unsigned int block)
 {
-	ft_printf("Read sur l'entree standard !\n");
+	unsigned int ret;
+
+	ret = 0;
+	ret += block << 24 & 0xff000000;
+	ret += block << 8 & 0xff0000;
+	ret += block >> 8 & 0xff00;
+	ret += block >> 24 & 0xff;
+	return (ret);
 }
 
-int	record_option(char *str)
+void			reverse_block(unsigned int *block)
 {
 	int	i;
-	int	ind;
 
 	i = 0;
-	while (str && str[++i])
+	while (i < 4)
 	{
-		if ((ind = ft_chrstr_ind(str[i], OPT_STR)) < 0)
-			return (print_illegal_option(str[i]));
-		if (!(getssl()->opt & OPT_P) && str[i] == 'p')
-			read_stdin();
-		else if (str[i] == 's')
-			return (read_string_option(str + i));
-		getssl()->opt |= (1 << ind);
-
-	}
-	return (0);
-}
-
-void	record(char **argv, int argc)
-{
-	int	i; 
-	int	opt;
-
-	i = 2; 
-	opt = 1;
-	while (i < argc)
-	{
-		if (opt && argv[i][0] == '-')
-		{
-			if (record_option(argv[i]) == -1)
-				read_string(argv[++i]);
-		}
-		else
-		{
-			opt = 0;
-			read_arguments(argv[i]);
-		}
+		block[i] = reverse(block[i]);
 		i++;
 	}
 }

@@ -130,13 +130,15 @@ void	ft_lstadd_arg(t_arg *new);
 */
 
 void	record(char **argv, int argc);
-int		record_option(char *str, int *opt);
+int		record_option(char *str);
+
 int		read_string(char *str);
 int		read_string_option(char *str);
+int		gestion_string(char *str);
+
 int		read_arguments(char *arg);
 void	read_stdin(void);
 int		record_commands(char *cmd);
-int		record_string(char *str);
 
 
 /*
@@ -148,11 +150,14 @@ int 	func_g(int b, int c, int d);
 int 	func_h(int b, int c, int d);
 int 	func_i(int b, int c, int d);
 
- int		rotate_left(unsigned int x, int n);
+int		rotate_left(unsigned int x, int n);
 
-unsigned int		reverse(unsigned int block);
-void	reverse_block(unsigned int *block);
+/*
+**	Reverse
+*/
 
+unsigned int	reverse(unsigned int block);
+void			reverse_block(unsigned int *block);
 
 
 /*
