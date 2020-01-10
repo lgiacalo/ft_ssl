@@ -83,15 +83,6 @@ static unsigned int k[64] = {
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
 };
 
-
-typedef struct		s_arg
-{
-	char			*name;
-	char			*str;
-	char			checksum[32];
-	struct s_arg	*next;
-}					t_arg;
-
 typedef struct		s_ssl
 {
 	char			*cmd;
@@ -103,12 +94,6 @@ typedef struct		s_ssl
 	struct s_arg	*list;
 }					t_ssl;
 
-typedef struct		s_md5
-{
-	int 			bufint[16];
-	char			bufchar[64];
-}					t_md5;
-
 /*
 **	Function structure ssl
 */
@@ -118,12 +103,12 @@ void	init_ssl(void);
 void	clean_ssl(void);
 
 
-/*
-**	Function structure arg
-*/
+// /*
+// **	Function structure arg
+// */
 
-t_arg	*ft_lstnew_arg(char *name, char *str);
-void	ft_lstadd_arg(t_arg *new);
+// t_arg	*ft_lstnew_arg(char *name, char *str);
+// void	ft_lstadd_arg(t_arg *new);
 
 /*
 **	Parsing
@@ -188,8 +173,6 @@ int		print_no_file(char *str);
 */
 
 void	print_ssl(void);
-void	print_arg_list(void);
-void	print_arg(t_arg *list);
 void	print_all(void);
 void	print_sizeof(void);
 void	print_block(char *block);

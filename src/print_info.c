@@ -3,7 +3,6 @@
 void	print_all(void)
 {
 	print_ssl();
-	print_arg_list();
 }
 
 void	print_ssl(void)
@@ -18,32 +17,6 @@ void	print_ssl(void)
 	ft_printf("State[4]:\t%#llx - %#llx - %#llx - %#llx\n", ssl->state[0], ssl->state[1], ssl->state[2], ssl->state[3]);
 	ft_printf("Size:\t\t%i\n", ssl->size);
 	ft_printf("List:\t\t%#llx\n", ssl->list);
-	ft_printf("***************************************\n");
-}
-
-void	print_arg(t_arg *list)
-{
-	ft_printf("Addr:\t\t%p\n", list);
-	ft_printf("Name:\t\t%s\n", list->name);
-	ft_printf("Str:\t\t%.20s%s\n", list->str, (ft_strlen(list->str) > 20) ? "..." : "");
-	ft_printf("Checksum:\t%s\n", list->checksum);
-	ft_printf("Next:\t\t%#llx\n", list->next);
-}
-
-void	print_arg_list(void)
-{
-	t_arg	*list;
-
-	list = getssl()->list;
-	ft_printf("\n******** Display Struct: s_arg ********\n");
-	if (!list)
-		ft_printf("List vide !\n");
-	for (int i = 0; list; i++)
-	{
-		ft_printf("------ List n*%i ------\n", i);
-		print_arg(list);
-		list = list->next;
-	}
 	ft_printf("***************************************\n");
 }
 
