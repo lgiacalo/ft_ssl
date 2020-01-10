@@ -20,8 +20,6 @@
 
 int md5_real (int argc, char **argv);
 
-#define ROTAT_LEFT(x, n) (((x) << (n)) | ((x) >> (32-(n))))
-
 
 # include "libft.h"
 
@@ -45,6 +43,8 @@ int md5_real (int argc, char **argv);
 /*
 **	Constantes
 */
+
+# define SIZE_READ	512
 
 # define STATE0		0x67452301
 # define STATE1		0xefcdab89
@@ -164,9 +164,12 @@ void			reverse_block(unsigned int *block);
 **	Gestion MD5
 */
 
-void	gestion_block(char *block, unsigned int size);
+void	gestion_block(char *block, unsigned int size, int add);
 void	gestion_last_block(char *block, unsigned int size);
 
+void			md5_transform(unsigned int *block);
+
+void	display_hash(char *name);
 
 
 /*

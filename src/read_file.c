@@ -13,28 +13,27 @@
 #include "ft_ssl.h"
 #include <fcntl.h>
 
-int	record_commands(char *cmd)
-{
-	t_ssl	*ssl;
-
-	ssl = getssl();
-	ssl->cmd = cmd;
-	if (!strcmp(CMD_MD5, cmd))
-		return (0);
-	else if (!strcmp(CMD_SHA256, cmd))
-		return (0);
-	ssl->cmd = NULL;
-	return (1);
-}
+#include <sys/stat.h>
 
 int	read_arguments(char *arg)
 {
-	ft_printf("Lecture des arguments: [%s]\n", arg);
+	int		fd;
+	char	buff[SIZE_READ];
+	size_t	size;
 
-	int	fd;
-
+	// ft_printf("Lecture des arguments: [%s]\n", arg);
 	if ((fd = open(arg, 'r')) == -1)
 		return (print_no_file(arg));
-	ft_printf("Open file [%s]: ok\n", arg);
+	while ((size = read(fd, buff, SIZE_READ)) >= 0)
+	{
+		gestion_block(buff, size, (size != SIZE_READ) ? 63 : 0);
+		if (size != SIZE_READ)
+		{
+			gestion_last_block(buff, size);
+			break;
+		}
+		ft_bzero(buff, SIZE_READ);
+	}
+	display_hash(arg);
 	return (0);
 }

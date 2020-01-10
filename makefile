@@ -30,11 +30,11 @@ SRC_PATH	= ./src/
 INC_PATH	= ./include/
 
 SRC_SSL		= main.c struct_ssl.c\
-				parsing.c parsing_args.c\
-				read_string.c\
+				parsing.c\
+				read_string.c read_file.c\
 				md5.c functions_md5.c\
 				reverse.c\
-				print.c print_info.c\
+				display.c print.c print_info.c\
 				md5_real.c
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))

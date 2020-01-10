@@ -18,6 +18,22 @@ void	read_stdin(void)
 	ft_printf("Read sur l'entree standard !\n");
 }
 
+
+int	record_commands(char *cmd)
+{
+	t_ssl	*ssl;
+
+	ssl = getssl();
+	ssl->cmd = cmd;
+	if (!strcmp(CMD_MD5, cmd))
+		return (0);
+	else if (!strcmp(CMD_SHA256, cmd))
+		return (0);
+	ssl->cmd = NULL;
+	return (1);
+}
+
+
 int	record_option(char *str)
 {
 	int	i;

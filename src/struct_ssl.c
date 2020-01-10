@@ -29,6 +29,7 @@ void	clean_ssl(void)
 	ssl->state[2] = STATE2;
 	ssl->state[3] = STATE3;
 	ssl->size = 0;
+	ssl->opt ^= (1 << 2);
 	ft_bzero(ssl->buf, 64);
 }
 

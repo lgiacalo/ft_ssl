@@ -41,7 +41,7 @@ void			md5_transform(unsigned int *block)
 	unsigned int	func;
 	int				i;
 
-	ft_printf("\nFunction MD5_transform\n");
+	// ft_printf("[MD5trans]");
 	ssl = getssl();
 	ft_memcpy(tmp, ssl->state, (sizeof(unsigned int) * 4));
 	i = -1;
@@ -64,7 +64,7 @@ void			gestion_last_block(char *block, unsigned int size)
 	int		mod;
 	int		div;
 
-	ft_printf("Fonction gestion last block\n");
+	// ft_printf("[LastBlock]");
 	ssl = getssl();
 	mod = size % 64;
 	div = (size / 64) * 64;
@@ -82,16 +82,16 @@ void			gestion_last_block(char *block, unsigned int size)
 	reverse_block(ssl->state);
 }
 
-void			gestion_block(char *block, unsigned int size)
+void			gestion_block(char *block, unsigned int size, int add)
 {
 	t_ssl			*ssl;
 	unsigned int	i;
 
-	ft_printf("Fonction gestion block\n");
+	// ft_printf("[Block]");
 	ssl = getssl();
 	ssl->size += size;
 	i = 0;
-	while ((i + 63) < size)
+	while ((i + add) < size)
 	{
 		md5_transform((unsigned int *)(&(block[i])));
 		i += 64;

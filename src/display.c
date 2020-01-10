@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_string.c                                      :+:      :+:    :+:   */
+/*   parsing_args.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,34 +12,13 @@
 
 #include "ft_ssl.h"
 
-int	gestion_string(char *str)
+void	display_hash(char *name)
 {
-	size_t	size;
+	t_ssl	*ssl;
 
-	getssl()->opt |= (1 << 2);
-	ft_printf("Read string: [%s]\n", str);
-	size = ft_strlen(str);
-	gestion_block(str, size, 63);
-	gestion_last_block(str, size);
-	//TODO: gestion affichage
-	display_hash(str);
-
-	return (0);
-}
-
-int	read_string_option(char *str)
-{
-	if (str && !(str[1]))
-		return (-1);
-	else
-		gestion_string(str + 1);
-	return (0);
-}
-
-int	read_string(char *str)
-{
-	if (!str)
-		return (print_requires_args('s'));
-	gestion_string(str);
-	return (0);
+	// print_ssl();
+	ssl = getssl();
+	ft_printf("[\"%s\"] : %.8x%.8x%.8x%.8x\n", name, (ssl->state[0]), \
+		(ssl->state[1]), (ssl->state[2]), (ssl->state[3]));
+	clean_ssl();
 }
