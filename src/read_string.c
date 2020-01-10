@@ -16,7 +16,6 @@ int	gestion_string(char *str)
 {
 	size_t	size;
 
-	getssl()->opt |= (1 << 2);
 	size = ft_strlen(str);
 	gestion_block(str, size, 63);
 	gestion_last_block(str, size);

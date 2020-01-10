@@ -41,7 +41,6 @@ void	init_ssl(void)
 	ssl = getssl();
 	ssl->cmd = NULL;
 	ssl->opt = 0;
-	ssl->list = NULL;
 	ssl->ret = 0;
 	ssl->state[0] = STATE0;
 	ssl->state[1] = STATE1;

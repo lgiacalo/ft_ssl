@@ -13,11 +13,40 @@
 #include "ft_ssl.h"
 
 
-void	read_stdin(void)
+int		read_stdin(void)
 {
 	ft_printf("Read sur l'entree standard !\n");
-}
 
+	char	buff[SIZE_READ];
+	char	*tmp;
+	size_t	size, size_tt;
+
+	if (getssl()->opt & OPT_PP)
+		return (gestion_string(""));
+	getssl()->opt |= (1 << 4);
+	size_tt = 0;
+	tmp = (char * )buff;
+	while ((size = read(0, tmp, SIZE_READ - size_tt)) >= 0)
+	{
+		size_tt += size;
+		if (size_tt == SIZE_READ)
+		{
+			gestion_block(buff, size, 0);
+			ft_bzero(buff, SIZE_READ);
+			tmp = (char *)buff;
+			size_tt = 0;
+		}
+		else if (!size)
+		{
+			gestion_block(buff, size_tt, 63);
+			gestion_last_block(buff, size_tt);
+			break;
+		}
+		tmp += size;
+	}
+	display_hash("argh");
+	return (0);
+}
 
 int	record_commands(char *cmd)
 {
@@ -47,17 +76,11 @@ int	record_option(char *str)
 	{
 		if ((ind = ft_chrstr_ind(str[i], OPT_STR)) < 0)
 			return (print_illegal_option(str[i]));
-		if (!(getssl()->opt & OPT_P) && str[i] == 'p')
+		getssl()->opt |= (1 << ind);
+		if (str[i] == 'p')
 			read_stdin();
-		else if (str[i] == 'p')
-		{
-			read_string_option("  ");
-			ind = 2;
-		}
 		else if (str[i] == 's')
 			return (read_string_option(str + i));
-		getssl()->opt |= (1 << ind);
-
 	}
 	return (0);
 }

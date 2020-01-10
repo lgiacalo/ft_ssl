@@ -39,6 +39,7 @@ int md5_real (int argc, char **argv);
 # define OPT_Q		(1 << 1)
 # define OPT_S		(1 << 2)
 # define OPT_R		(1 << 3)
+# define OPT_PP		(1 << 4)
 
 /*
 **	Constantes
@@ -91,7 +92,6 @@ typedef struct		s_ssl
 	unsigned int 	state[4];
 	long int 		size;
 	char			buf[64];
-	struct s_arg	*list;
 }					t_ssl;
 
 /*
@@ -122,7 +122,7 @@ int		read_string_option(char *str);
 int		gestion_string(char *str);
 
 int		read_arguments(char *arg);
-void	read_stdin(void);
+int		read_stdin(void);
 int		record_commands(char *cmd);
 
 

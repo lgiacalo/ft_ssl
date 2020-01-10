@@ -25,10 +25,12 @@ void	display_hash(char *name)
 
 	ssl = getssl();
 	c = (ssl->opt & OPT_S) ? '"' : 0;
-	if ((ssl->opt & OPT_P) || (ssl->opt & OPT_R))
+	if (ssl->opt & OPT_Q)
+		print_hash(ssl->state);
+	else if ((ssl->opt & OPT_P) || (ssl->opt & OPT_R))
 	{
 		print_hash(ssl->state);
-		if (name)
+		if (!(ssl->opt & OPT_P))
 			ft_printf(" %c%s%c", c, name, c);
 	}
 	else

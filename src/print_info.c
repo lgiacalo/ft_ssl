@@ -16,7 +16,6 @@ void	print_ssl(void)
 	ft_printf("Ret:\t\t%i\n", ssl->ret);
 	ft_printf("State[4]:\t%#llx - %#llx - %#llx - %#llx\n", ssl->state[0], ssl->state[1], ssl->state[2], ssl->state[3]);
 	ft_printf("Size:\t\t%i\n", ssl->size);
-	ft_printf("List:\t\t%#llx\n", ssl->list);
 	ft_printf("***************************************\n");
 }
 
