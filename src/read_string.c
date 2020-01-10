@@ -17,13 +17,10 @@ int	gestion_string(char *str)
 	size_t	size;
 
 	getssl()->opt |= (1 << 2);
-	ft_printf("Read string: [%s]\n", str);
 	size = ft_strlen(str);
 	gestion_block(str, size, 63);
 	gestion_last_block(str, size);
-	//TODO: gestion affichage
 	display_hash(str);
-
 	return (0);
 }
 

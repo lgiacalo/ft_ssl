@@ -12,13 +12,30 @@
 
 #include "ft_ssl.h"
 
+void	print_hash(unsigned int state[4])
+{
+	ft_printf("%.8x%.8x%.8x%.8x", state[0], \
+		state[1], state[2], state[3]);
+}
+
 void	display_hash(char *name)
 {
 	t_ssl	*ssl;
+	char	c;
 
-	// print_ssl();
 	ssl = getssl();
-	ft_printf("[\"%s\"] : %.8x%.8x%.8x%.8x\n", name, (ssl->state[0]), \
-		(ssl->state[1]), (ssl->state[2]), (ssl->state[3]));
+	c = (ssl->opt & OPT_S) ? '"' : 0;
+	if ((ssl->opt & OPT_P) || (ssl->opt & OPT_R))
+	{
+		print_hash(ssl->state);
+		if (name)
+			ft_printf(" %c%s%c", c, name, c);
+	}
+	else
+	{
+		ft_printf("MD5 (%c%s%c) = ", c, name, c);
+		print_hash(ssl->state);
+	}
+	ft_printf("\n");
 	clean_ssl();
 }

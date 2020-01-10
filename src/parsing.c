@@ -33,6 +33,9 @@ int	record_commands(char *cmd)
 	return (1);
 }
 
+/*
+**	si -pp alors entre standard + ""
+*/
 
 int	record_option(char *str)
 {
@@ -46,6 +49,11 @@ int	record_option(char *str)
 			return (print_illegal_option(str[i]));
 		if (!(getssl()->opt & OPT_P) && str[i] == 'p')
 			read_stdin();
+		else if (str[i] == 'p')
+		{
+			read_string_option("  ");
+			ind = 2;
+		}
 		else if (str[i] == 's')
 			return (read_string_option(str + i));
 		getssl()->opt |= (1 << ind);
