@@ -45,7 +45,7 @@ int md5_real (int argc, char **argv);
 **	Constantes
 */
 
-# define SIZE_READ	512
+# define SIZE_READ	1024
 
 # define STATE0		0x67452301
 # define STATE1		0xefcdab89
@@ -92,6 +92,7 @@ typedef struct		s_ssl
 	unsigned int 	state[4];
 	long int 		size;
 	char			buf[64];
+	char			buff[SIZE_READ];
 }					t_ssl;
 
 /*
@@ -122,8 +123,11 @@ int		read_string_option(char *str);
 int		gestion_string(char *str);
 
 int		read_arguments(char *arg);
-int		read_stdin(void);
 int		record_commands(char *cmd);
+
+int		read_stdin(char *buff);
+int		gestion_stdin(void);
+
 
 
 /*

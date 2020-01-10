@@ -12,39 +12,75 @@
 
 #include "ft_ssl.h"
 
-
-int		read_stdin(void)
+int		read_stdin(char *buff)
 {
-	ft_printf("Read sur l'entree standard !\n");
-
-	char	buff[SIZE_READ];
 	char	*tmp;
 	size_t	size, size_tt;
 
-	if (getssl()->opt & OPT_PP)
-		return (gestion_string(""));
-	getssl()->opt |= (1 << 4);
 	size_tt = 0;
 	tmp = (char * )buff;
 	while ((size = read(0, tmp, SIZE_READ - size_tt)) >= 0)
 	{
 		size_tt += size;
-		if (size_tt == SIZE_READ)
+
+		if (size_tt == SIZE_READ || !size)
 		{
-			gestion_block(buff, size, 0);
+			gestion_block(buff, (!size) ? size_tt : size, (!size) ? 63 : 0);
+			if (!size)
+			{
+				gestion_last_block(buff, size_tt);
+				break;
+			}
 			ft_bzero(buff, SIZE_READ);
 			tmp = (char *)buff;
 			size_tt = 0;
 		}
-		else if (!size)
-		{
-			gestion_block(buff, size_tt, 63);
-			gestion_last_block(buff, size_tt);
-			break;
-		}
-		tmp += size;
+		else
+			tmp += size;
 	}
-	display_hash("argh");
+	return (0);
+}
+
+// if (size_tt == SIZE_READ || !size)
+// {
+// 	gestion_block(buff, (!size) ? size_tt : size, (!size) ? 63 : 0);
+// 	if (!size)
+// 	{
+// 		gestion_last_block(buff, size_tt);
+// 		break;
+// 	}
+// 	ft_bzero(buff, SIZE_READ);
+// 	tmp = (char *)buff;
+// 	size_tt = 0;
+// }
+
+// if (size_tt == SIZE_READ)
+// 		{
+// 			gestion_block(buff, size, 0);
+// 			ft_bzero(buff, SIZE_READ);
+// 			tmp = (char *)buff;
+// 			size_tt = 0;
+// 		}
+// 		else if (!size)
+// 		{
+// 			gestion_block(buff, size_tt, 63);
+// 			gestion_last_block(buff, size_tt);
+// 			break;
+// 		}
+
+
+int	gestion_stdin(void)
+{
+	t_ssl	*ssl;
+	char	buff[SIZE_READ];
+
+	ssl = getssl();
+
+	if (ssl->opt & OPT_PP)
+		return (gestion_string(""));
+	ssl->opt |= (1 << 4);
+	read_stdin(buff);
+	display_hash(NULL);
 	return (0);
 }
 
@@ -78,7 +114,7 @@ int	record_option(char *str)
 			return (print_illegal_option(str[i]));
 		getssl()->opt |= (1 << ind);
 		if (str[i] == 'p')
-			read_stdin();
+			gestion_stdin();
 		else if (str[i] == 's')
 			return (read_string_option(str + i));
 	}

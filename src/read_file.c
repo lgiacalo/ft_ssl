@@ -34,6 +34,7 @@ int	read_arguments(char *arg)
 		}
 		ft_bzero(buff, SIZE_READ);
 	}
+	close(fd);
 	display_hash(arg);
 	return (0);
 }

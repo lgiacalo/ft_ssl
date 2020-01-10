@@ -5,6 +5,7 @@ int		main(int argc, char **argv)
 {
 	int	i;
 
+	ft_printf("BUFSIZ = [%d]\n", BUFSIZ);
 
 	i = -1;
 	if (argc == 1)
@@ -15,7 +16,7 @@ int		main(int argc, char **argv)
 	if (record_commands(argv[1]))
 		return (print_usage_commands(argv[1]));
 	if (argc == 2)
-		read_stdin();
+		gestion_stdin();
 	else
 		record(argv, argc);
 
