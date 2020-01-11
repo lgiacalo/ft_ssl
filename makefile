@@ -33,7 +33,7 @@ SRC_SSL		= main.c struct_ssl.c\
 				parsing.c\
 				read_string.c read_file.c\
 				md5.c functions_md5.c\
-				reverse.c\
+				reverse.c math_utils.c\
 				display.c print.c print_info.c\
 				md5_real.c
 

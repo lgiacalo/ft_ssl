@@ -24,7 +24,6 @@ int		record_commands(char *cmd)
 	ind = 0;
 	while (g_hash[ind].func && strcmp(s, g_hash[ind].name))
 		ind++;
-	ft_printf("ind = [%d]\n", ind);
 	if (ind < NB_HASH)
 	{
 		ssl->f = ind;

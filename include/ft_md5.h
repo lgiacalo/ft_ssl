@@ -76,7 +76,6 @@ int 							func_f(int b, int c, int d);
 int 							func_g(int b, int c, int d);
 int 							func_h(int b, int c, int d);
 int 							func_i(int b, int c, int d);
-int								rotate_left(unsigned int x, int n);
 
 /*
 **	Gestion MD5

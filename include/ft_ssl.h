@@ -85,6 +85,9 @@ void							clean_ssl(void);
 **	Reverse
 */
 
+int								rotate_left(unsigned int x, int n);
+int								rotate_right(unsigned int x, int n);
+
 unsigned int					reverse(unsigned int block);
 void							reverse_block(unsigned int *block);
 
