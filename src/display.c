@@ -23,7 +23,6 @@ void	display_hash(char *name)
 	t_ssl	*ssl;
 	char	c;
 
-	print_ssl();
 	ssl = getssl();
 	c = (ssl->opt & OPT_S) ? '"' : 0;
 	if (ssl->opt & OPT_Q)
