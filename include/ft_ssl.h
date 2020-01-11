@@ -29,7 +29,7 @@
 # define CMD_MD5				"md5"
 # define CMD_SHA256				"sha256"
 
-# define NB_HASH				2
+# define NB_HASH				1
 /*
 **	OPTIONS
 */

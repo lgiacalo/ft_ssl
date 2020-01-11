@@ -22,8 +22,7 @@ int		record_commands(char *cmd)
 	ssl->cmd = cmd;
 	s = ft_strlowcase(cmd);
 	ind = 0;
-	while (g_hash[ind].func
-		&& strncmp(s, g_hash[ind].name, ft_strlen(g_hash[ind].name)))
+	while (g_hash[ind].func && strcmp(s, g_hash[ind].name))
 		ind++;
 	ft_printf("ind = [%d]\n", ind);
 	if (ind < NB_HASH)
@@ -32,18 +31,15 @@ int		record_commands(char *cmd)
 		return (0);
 	}
 	ssl->cmd = NULL;
-	return (-1);
+	return (1);
 }
 
 int		main(int argc, char **argv)
 {
-	int ret;
-
 	if (argc == 1)
 		return (print_usage());
 	init_ssl();
-	ret = record_commands(argv[1]);
-	if (ret == -1)
+	if (record_commands(argv[1]))
 		return (print_usage_commands(argv[1]));
 	g_hash[getssl()->f].func(argv, argc);
 	return (0);
