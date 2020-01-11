@@ -18,39 +18,36 @@
 # include <unistd.h>
 # include <math.h>
 
-int md5_real (int argc, char **argv);
-
-
 # include "libft.h"
 
 /*
 **	COMMANDS
 */
 
-# define CMD_MD5	"md5"
-# define CMD_SHA256	"sha256"
+# define CMD_MD5				"md5"
+# define CMD_SHA256				"sha256"
 
 /*
 **	OPTIONS
 */
 
-# define OPT_STR	"pqsr"
-# define OPT_P		(1 << 0)
-# define OPT_Q		(1 << 1)
-# define OPT_S		(1 << 2)
-# define OPT_R		(1 << 3)
-# define OPT_PP		(1 << 4)
+# define OPT_STR				"pqsr"
+# define OPT_P					(1 << 0)
+# define OPT_Q					(1 << 1)
+# define OPT_S					(1 << 2)
+# define OPT_R					(1 << 3)
+# define OPT_PP					(1 << 4)
 
 /*
 **	Constantes
 */
 
-# define SIZE_READ	1024
+# define SIZE_READ				1024
 
-# define STATE0		0x67452301
-# define STATE1		0xefcdab89
-# define STATE2		0x98badcfe
-# define STATE3		0x10325476
+# define STATE0					0x67452301
+# define STATE1					0xefcdab89
+# define STATE2					0x98badcfe
+# define STATE3					0x10325476
 
 static unsigned char PADDING[64] = {
  0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -84,92 +81,77 @@ static unsigned int k[64] = {
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
 };
 
-typedef struct		s_ssl
+typedef struct					s_ssl
 {
-	char			*cmd;
-	int				opt;
-	int				ret;
-	unsigned int 	state[4];
-	long int 		size;
-	char			buf[64];
-	char			buff[SIZE_READ];
-}					t_ssl;
+	char						*cmd;
+	int							opt;
+	int							ret;
+	unsigned int 				state[4];
+	long int 					size;
+	char						buf[64];
+	char						buff[SIZE_READ];
+}								t_ssl;
 
 /*
 **	Function structure ssl
 */
 
-t_ssl	*getssl(void);
-void	init_ssl(void);
-void	clean_ssl(void);
-
-
-// /*
-// **	Function structure arg
-// */
-
-// t_arg	*ft_lstnew_arg(char *name, char *str);
-// void	ft_lstadd_arg(t_arg *new);
+t_ssl							*getssl(void);
+void							init_ssl(void);
+void							clean_ssl(void);
 
 /*
 **	Parsing
 */
 
-void	record(char **argv, int argc);
-int		record_option(char *str);
+void							record(char **argv, int argc);
+int								record_option(char *str);
 
-int		read_string(char *str);
-int		read_string_option(char *str);
-int		gestion_string(char *str);
+int								read_string(char *str);
+int								read_string_option(char *str);
+int								gestion_string(char *str);
 
-int		read_arguments(char *arg);
-int		record_commands(char *cmd);
+int								read_arguments(char *arg);
+int								record_commands(char *cmd);
 
-int		read_stdin(char *buff);
-int		gestion_stdin(void);
-
-
+void							read_stdin(char *buff);
+int								gestion_stdin(void);
 
 /*
 **	Functions non lineaire MD5
 */
 
-int 	func_f(int b, int c, int d);
-int 	func_g(int b, int c, int d);
-int 	func_h(int b, int c, int d);
-int 	func_i(int b, int c, int d);
-
-int		rotate_left(unsigned int x, int n);
+int 							func_f(int b, int c, int d);
+int 							func_g(int b, int c, int d);
+int 							func_h(int b, int c, int d);
+int 							func_i(int b, int c, int d);
+int								rotate_left(unsigned int x, int n);
 
 /*
 **	Reverse
 */
 
-unsigned int	reverse(unsigned int block);
-void			reverse_block(unsigned int *block);
-
+unsigned int					reverse(unsigned int block);
+void							reverse_block(unsigned int *block);
 
 /*
 **	Gestion MD5
 */
 
-void	gestion_block(char *block, unsigned int size, int add);
-void	gestion_last_block(char *block, unsigned int size);
-
-void			md5_transform(unsigned int *block);
-
-void	display_hash(char *name);
-
+void							gestion_block(char *block, unsigned int size, int add);
+void							gestion_last_block(char *block, unsigned int size);
+void							md5_transform(unsigned int *block);
+void							display_hash(char *name);
 
 /*
 **	Print Error
 */
 
-int		print_usage(void);
-int		print_usage_commands(char *cmd);
-int		print_illegal_option(char opt);
-int		print_requires_args(char opt);
-int		print_no_file(char *str);
+int								print_usage(void);
+int								print_usage_commands(char *cmd);
+int								print_illegal_option(char opt);
+int								print_requires_args(char opt);
+int								print_no_file(char *str);
 
 
 /*
@@ -185,7 +167,5 @@ void	print_state_4int(int a, int b, int c, int d);
 void	print_sinus(void);
 void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
 void	print_info_func(unsigned int state[4], int x, int i, int s, int sin);
-
-
 
 #endif

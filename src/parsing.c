@@ -12,24 +12,25 @@
 
 #include "ft_ssl.h"
 
-int		read_stdin(char *buff)
+void	read_stdin(char *buff)
 {
 	char	*tmp;
-	size_t	size, size_tt;
+	size_t	size;
+	size_t	size_tt;
 
 	size_tt = 0;
-	tmp = (char * )buff;
+	tmp = (char *)buff;
 	while ((size = read(0, tmp, SIZE_READ - size_tt)) >= 0)
 	{
 		size_tt += size;
-
 		if (size_tt == SIZE_READ || !size)
 		{
-			gestion_block(buff, (!size) ? size_tt : size, (!size) ? 63 : 0);
+			write(1, buff, size_tt);
+			gestion_block(buff, size_tt, (!size) ? 63 : 0);
 			if (!size)
 			{
 				gestion_last_block(buff, size_tt);
-				break;
+				break ;
 			}
 			ft_bzero(buff, SIZE_READ);
 			tmp = (char *)buff;
@@ -38,53 +39,24 @@ int		read_stdin(char *buff)
 		else
 			tmp += size;
 	}
-	return (0);
 }
 
-// if (size_tt == SIZE_READ || !size)
-// {
-// 	gestion_block(buff, (!size) ? size_tt : size, (!size) ? 63 : 0);
-// 	if (!size)
-// 	{
-// 		gestion_last_block(buff, size_tt);
-// 		break;
-// 	}
-// 	ft_bzero(buff, SIZE_READ);
-// 	tmp = (char *)buff;
-// 	size_tt = 0;
-// }
-
-// if (size_tt == SIZE_READ)
-// 		{
-// 			gestion_block(buff, size, 0);
-// 			ft_bzero(buff, SIZE_READ);
-// 			tmp = (char *)buff;
-// 			size_tt = 0;
-// 		}
-// 		else if (!size)
-// 		{
-// 			gestion_block(buff, size_tt, 63);
-// 			gestion_last_block(buff, size_tt);
-// 			break;
-// 		}
-
-
-int	gestion_stdin(void)
+int		gestion_stdin(void)
 {
 	t_ssl	*ssl;
 	char	buff[SIZE_READ];
 
 	ssl = getssl();
-
 	if (ssl->opt & OPT_PP)
 		return (gestion_string(""));
 	ssl->opt |= (1 << 4);
+	ssl->opt |= (1 << 0);
 	read_stdin(buff);
 	display_hash(NULL);
 	return (0);
 }
 
-int	record_commands(char *cmd)
+int		record_commands(char *cmd)
 {
 	t_ssl	*ssl;
 
@@ -102,7 +74,7 @@ int	record_commands(char *cmd)
 **	si -pp alors entre standard + ""
 */
 
-int	record_option(char *str)
+int		record_option(char *str)
 {
 	int	i;
 	int	ind;
@@ -123,10 +95,10 @@ int	record_option(char *str)
 
 void	record(char **argv, int argc)
 {
-	int	i; 
+	int	i;
 	int	opt;
 
-	i = 2; 
+	i = 2;
 	opt = 1;
 	while (i < argc)
 	{

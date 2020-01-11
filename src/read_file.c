@@ -13,15 +13,12 @@
 #include "ft_ssl.h"
 #include <fcntl.h>
 
-#include <sys/stat.h>
-
 int	read_arguments(char *arg)
 {
 	int		fd;
 	char	buff[SIZE_READ];
 	size_t	size;
 
-	// ft_printf("Lecture des arguments: [%s]\n", arg);
 	if ((fd = open(arg, 'r')) == -1)
 		return (print_no_file(arg));
 	while ((size = read(fd, buff, SIZE_READ)) >= 0)
@@ -30,7 +27,7 @@ int	read_arguments(char *arg)
 		if (size != SIZE_READ)
 		{
 			gestion_last_block(buff, size);
-			break;
+			break ;
 		}
 		ft_bzero(buff, SIZE_READ);
 	}
