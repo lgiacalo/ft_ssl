@@ -39,7 +39,7 @@ SRC_SSL		= main.c struct_ssl.c\
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))
 
-INC_SSL		= ft_ssl.h cp.h
+INC_SSL		= ft_ssl.h ft_md5.h cp.h
 
 LIB		= libft/libft.a
 
