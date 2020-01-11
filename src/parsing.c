@@ -56,20 +56,6 @@ int		gestion_stdin(void)
 	return (0);
 }
 
-int		record_commands(char *cmd)
-{
-	t_ssl	*ssl;
-
-	ssl = getssl();
-	ssl->cmd = cmd;
-	if (!strcmp(CMD_MD5, cmd))
-		return (0);
-	else if (!strcmp(CMD_SHA256, cmd))
-		return (0);
-	ssl->cmd = NULL;
-	return (1);
-}
-
 /*
 **	si -pp alors entre standard + ""
 */
@@ -93,7 +79,7 @@ int		record_option(char *str)
 	return (0);
 }
 
-void	record(char **argv, int argc)
+void	record_md5(char **argv, int argc)
 {
 	int	i;
 	int	opt;
@@ -114,4 +100,6 @@ void	record(char **argv, int argc)
 		}
 		i++;
 	}
+	if (argc == 2)
+		gestion_stdin();
 }

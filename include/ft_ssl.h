@@ -20,6 +20,7 @@
 
 # include "libft.h"
 # include "ft_md5.h"
+# include "ft_sha.h"
 
 /*
 **	COMMANDS
@@ -28,6 +29,7 @@
 # define CMD_MD5				"md5"
 # define CMD_SHA256				"sha256"
 
+# define NB_HASH				2
 /*
 **	OPTIONS
 */
@@ -50,11 +52,25 @@ typedef struct					s_ssl
 	char						*cmd;
 	int							opt;
 	int							ret;
+	int							f;
 	unsigned int 				state[4];
 	long int 					size;
 	char						buf[64];
 	char						buff[SIZE_READ];
 }								t_ssl;
+
+typedef struct					s_hash
+{
+	void 						(*func)(char **argv, int argc);
+	char 						*name;
+}								t_hash;
+
+static t_hash g_hash[] =
+{
+	{record_md5, "md5"},
+	// {record_sha256, "sha256"},
+	{NULL, NULL}
+};
 
 /*
 **	Function structure ssl
@@ -64,22 +80,6 @@ t_ssl							*getssl(void);
 void							init_ssl(void);
 void							clean_ssl(void);
 
-/*
-**	Parsing
-*/
-
-void							record(char **argv, int argc);
-int								record_option(char *str);
-
-int								read_string(char *str);
-int								read_string_option(char *str);
-int								gestion_string(char *str);
-
-int								read_arguments(char *arg);
-int								record_commands(char *cmd);
-
-void							read_stdin(char *buff);
-int								gestion_stdin(void);
 
 /*
 **	Reverse

@@ -51,6 +51,24 @@ static unsigned int k[64] = {
 };
 
 /*
+**	Parsing
+*/
+
+
+void							record_md5(char **argv, int argc);
+int								record_option(char *str);
+
+int								read_string(char *str);
+int								read_string_option(char *str);
+int								gestion_string(char *str);
+
+int								read_arguments(char *arg);
+int								record_commands(char *cmd);
+
+void							read_stdin(char *buff);
+int								gestion_stdin(void);
+
+/*
 **	Functions non lineaire MD5
 */
 

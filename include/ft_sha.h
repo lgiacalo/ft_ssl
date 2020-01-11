@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_sha.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,41 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ssl.h"
+#ifndef FT_SHA_H
+# define FT_SHA_H
 
-int		record_commands(char *cmd)
-{
-	t_ssl	*ssl;
-	char	*s;
-	int		ind;
+void							record_sha256(char **argv, int argc);
 
-	ssl = getssl();
-	ssl->cmd = cmd;
-	s = ft_strlowcase(cmd);
-	ind = 0;
-	while (g_hash[ind].func
-		&& strncmp(s, g_hash[ind].name, ft_strlen(g_hash[ind].name)))
-		ind++;
-	ft_printf("ind = [%d]\n", ind);
-	if (ind < NB_HASH)
-	{
-		ssl->f = ind;
-		return (0);
-	}
-	ssl->cmd = NULL;
-	return (-1);
-}
 
-int		main(int argc, char **argv)
-{
-	int ret;
 
-	if (argc == 1)
-		return (print_usage());
-	init_ssl();
-	ret = record_commands(argv[1]);
-	if (ret == -1)
-		return (print_usage_commands(argv[1]));
-	g_hash[getssl()->f].func(argv, argc);
-	return (0);
-}
+#endif
