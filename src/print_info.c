@@ -1,5 +1,17 @@
 #include "ft_ssl.h"
 
+void	print_uint32_64(uint32_t w[64])
+{
+	ft_printf("\n*********** Structure: s_ssl **********\n");
+	for (int i = 0; i < 64; i++)
+	{
+		if (!(i % 8))
+			ft_printf("\n");
+		ft_printf("%s%#.8x ", (w[i]) ? "" : "0x", w[i]);
+	}
+	ft_printf("\n***************************************\n");
+}
+
 void	print_all(void)
 {
 	print_ssl();
@@ -49,6 +61,14 @@ void	print_block(char *block)
 	ft_printf("\n");
 }
 
+void	print_state_sha256(unsigned int state[8])
+{
+	ft_printf("\n******** Display State[8] SHA : ********\n");
+	for (int i = 0; i < 8; i++)
+		ft_printf("%c: %#.8x\n", (int)('A') + i, state[i]);
+	ft_printf("****************************************\n\n");
+}
+
 void	print_state(unsigned int state[4])
 {
 	ft_printf("\n********** Display State: **********\n");
@@ -65,7 +85,7 @@ void	print_state_4int(int a, int b, int c, int d)
 	ft_printf("%c: %#.8x\n", (int)('B'), b);
 	ft_printf("%c: %#.8x\n", (int)('C'), c);
 	ft_printf("%c: %#.8x\n", (int)('D'), d);
-	ft_printf("************************************\n");
+	ft_printf("**************************************\n\n");
 	ft_printf("************************************\n");
 }
 

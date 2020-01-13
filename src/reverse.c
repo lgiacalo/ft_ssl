@@ -12,24 +12,36 @@
 
 #include "ft_ssl.h"
 
-unsigned int	reverse(unsigned int block)
+uint64_t	reverse64(uint64_t block)
 {
-	unsigned int ret;
+	return ((block & 0x00000000000000FFUL) << 56
+		| (block & 0x000000000000FF00UL) << 40
+		| (block & 0x0000000000FF0000UL) << 24
+		| (block & 0x00000000FF000000UL) << 8
+		| (block & 0x000000FF00000000UL) >> 8
+		| (block & 0x0000FF0000000000UL) >> 24
+		| (block & 0x00FF000000000000UL) >> 40
+		| (block & 0xFF00000000000000UL) >> 56);
+}
+
+uint32_t	reverse(uint32_t block)
+{
+	uint32_t ret;
 
 	ret = 0;
 	ret += block << 24 & 0xff000000;
-	ret += block << 8 & 0xff0000;
-	ret += block >> 8 & 0xff00;
+	ret += block << 8 & 0x00ff0000;
+	ret += block >> 8 & 0x000ff00;
 	ret += block >> 24 & 0xff;
 	return (ret);
 }
 
-void			reverse_block(unsigned int *block)
+void			reverse_block(uint32_t *block, int ind)
 {
 	int	i;
 
 	i = 0;
-	while (i < 4)
+	while (i < ind)
 	{
 		block[i] = reverse(block[i]);
 		i++;

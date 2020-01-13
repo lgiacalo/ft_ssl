@@ -41,5 +41,9 @@ int		main(int argc, char **argv)
 	if (record_commands(argv[1]))
 		return (print_usage_commands(argv[1]));
 	g_hash[getssl()->f].func(argv, argc);
+
+
+	sha256_test();
+
 	return (0);
 }

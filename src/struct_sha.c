@@ -43,18 +43,18 @@ void	init_sha(void)
 	t_sha	*sha;
 
 	sha = getsha();
-	sha->cmd = NULL;
+	sha->cmd = getssl()->cmd;
 	sha->opt = 0;
 	sha->ret = 0;
-	sha->f = -1;
+	sha->f = getssl()->f;
 	sha->state[0] = STATE00;
-	ssha>state[1] = STATE11;
-	ssha>state[2] = STATE22;
-	ssha>state[3] = STATE33;
+	sha->state[1] = STATE11;
+	sha->state[2] = STATE22;
+	sha->state[3] = STATE33;
 	sha->state[4] = STATE44;
 	sha->state[5] = STATE55;
 	sha->state[6] = STATE66;
 	sha->state[7] = STATE77;
-	ssha>size = 0;
+	sha->size = 0;
 	// ft_bzero(ssha>buf, 64);
 }

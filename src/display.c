@@ -12,11 +12,23 @@
 
 #include "ft_ssl.h"
 
-void	print_hash(unsigned int state[4])
+void	print_hash(unsigned int state[], int ind)
 {
-	ft_printf("%.8x%.8x%.8x%.8x", state[0], \
-		state[1], state[2], state[3]);
+	int	i;
+
+	i = 0;
+	while (i < ind)
+	{
+		ft_printf("%.8x ", state[i]);
+		i++;
+	}
 }
+
+// void	print_hash(unsigned int state[4])
+// {
+// 	ft_printf("%.8x%.8x%.8x%.8x", state[0], \
+// 		state[1], state[2], state[3]);
+// }
 
 void	display_hash(char *name)
 {
@@ -26,17 +38,44 @@ void	display_hash(char *name)
 	ssl = getssl();
 	c = (ssl->opt & OPT_S) ? '"' : 0;
 	if (ssl->opt & OPT_Q)
-		print_hash(ssl->state);
+		print_hash(ssl->state, 4);
 	else if ((ssl->opt & OPT_P) || (ssl->opt & OPT_R))
 	{
-		print_hash(ssl->state);
+		print_hash(ssl->state, 4);
 		if (!(ssl->opt & OPT_P))
 			ft_printf(" %c%s%c", c, name, c);
 	}
 	else
 	{
 		ft_printf("MD5 (%c%s%c) = ", c, name, c);
-		print_hash(ssl->state);
+		print_hash(ssl->state, 4);
+	}
+	ft_printf("\n");
+	clean_ssl();
+}
+
+
+
+
+void	display_hash256(char *name)
+{
+	t_sha	*sha;
+	char	c;
+
+	sha = getsha();
+	c = (sha->opt & OPT_S) ? '"' : 0;
+	if (sha->opt & OPT_Q)
+		print_hash(sha->state, 8);
+	else if ((sha->opt & OPT_P) || (sha->opt & OPT_R))
+	{
+		print_hash(sha->state, 8);
+		if (!(sha->opt & OPT_P))
+			ft_printf(" %c%s%c", c, name, c);
+	}
+	else
+	{
+		ft_printf("MD5 (%c%s%c) = ", c, name, c);
+		print_hash(sha->state, 8);
 	}
 	ft_printf("\n");
 	clean_ssl();

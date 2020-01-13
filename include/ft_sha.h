@@ -43,7 +43,7 @@ typedef struct					s_sha
 	int							ret;
 	int							f;
 	unsigned int 				state[8];
-	long int 					size;
+	uint64_t 					size;
 	char						buf[64];
 	// char						buff[SIZE_READ];
 }								t_sha;
@@ -59,9 +59,19 @@ void				record_sha256(char **argv, int argc);
 **	Function structure sha
 */
 
-t_sha	*getsha(void);
-void	clean_sha(void);
-void	init_sha(void);
+t_sha				*getsha(void);
+void				clean_sha(void);
+void				init_sha(void);
+
+/*
+**	Gestion sha256
+*/
+
+void			gestion_block256(char *block, unsigned int size, int add);
+void			gestion_last_block256(char *block, unsigned int size);
+
+void			display_hash256(char *name);
+
 
 /*
 **	Fonctions logiques - 32 BITS

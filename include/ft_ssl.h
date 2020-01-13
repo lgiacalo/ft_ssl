@@ -21,6 +21,7 @@
 # include "libft.h"
 # include "ft_md5.h"
 # include "ft_sha.h"
+# include "sha256.h"
 
 /*
 **	COMMANDS
@@ -29,7 +30,7 @@
 # define CMD_MD5				"md5"
 # define CMD_SHA256				"sha256"
 
-# define NB_HASH				1
+# define NB_HASH				2
 /*
 **	OPTIONS
 */
@@ -54,7 +55,7 @@ typedef struct					s_ssl
 	int							ret;
 	int							f;
 	unsigned int 				state[4];
-	long int 					size;
+	uint64_t 					size;
 	char						buf[64];
 	char						buff[SIZE_READ];
 }								t_ssl;
@@ -68,7 +69,7 @@ typedef struct					s_hash
 static t_hash					g_hash[] =
 {
 	{record_md5, "md5"},
-	// {record_sha256, "sha256"},
+	{record_sha256, "sha256"},
 	{NULL, NULL}
 };
 
@@ -87,8 +88,9 @@ void							clean_ssl(void);
 uint32_t						rotate_left(uint32_t x, int n);
 uint32_t						rotate_right(uint32_t x, int n);
 
-unsigned int					reverse(unsigned int block);
-void							reverse_block(unsigned int *block);
+uint64_t						reverse64(uint64_t block);
+uint32_t						reverse(uint32_t block);
+void							reverse_block(uint32_t *block, int ind);
 
 /*
 **	Print Error
@@ -104,6 +106,10 @@ int								print_no_file(char *str);
 **	Print structure
 */
 
+void							print_uint32_64(uint32_t w[64]);
+void							print_state_sha256(unsigned int state[8]);
+
+
 void							print_ssl(void);
 void							print_all(void);
 void							print_sizeof(void);
@@ -113,5 +119,7 @@ void							print_state_4int(int a, int b, int c, int d);
 void							print_sinus(void);
 void							print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
 void							print_info_func(unsigned int state[4], int x, int i, int s, int sin);
+
+void 							sha256_test();
 
 #endif
