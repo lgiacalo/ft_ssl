@@ -37,7 +37,7 @@ SRC_SSL		= main.c struct_ssl.c\
 				display.c print.c print_info.c\
 				functions_logique_sha32b.c\
 				sha256.c parsing_sha.c struct_sha.c\
-				sha2566.c
+				sha2566.c sha256_test.c
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))
 

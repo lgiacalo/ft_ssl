@@ -42,12 +42,12 @@ uint32_t	bsig1(uint32_t x)
 uint32_t	ssig0(uint32_t x)
 {
 	return ((rotate_right(x, 7)) ^ (rotate_right(x, 18))
-		^ (rotate_right(x, 3)));
+		^ ((x >> 3)));
 }
 
 // SSIG1(x) = ROTR^17(x) XOR ROTR^19(x) XOR SHR^10(x)
 uint32_t	ssig1(uint32_t x)
 {
 	return ((rotate_right(x, 17)) ^ (rotate_right(x, 19))
-		^ (rotate_right(x, 10)));
+		^ ((x >> 10)));
 }

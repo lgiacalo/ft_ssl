@@ -108,6 +108,7 @@ int								print_no_file(char *str);
 
 void							print_uint32_64(uint32_t w[64]);
 void							print_state_sha256(unsigned int state[8]);
+void							print_state_8int(int a, int b, int c, int d, int e, int f, int g, int h);
 
 
 void							print_ssl(void);
@@ -120,6 +121,6 @@ void							print_sinus(void);
 void							print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
 void							print_info_func(unsigned int state[4], int x, int i, int s, int sin);
 
-void 							sha256_test();
+int 							sha256_test();
 
 #endif

@@ -78,9 +78,23 @@ void	print_state(unsigned int state[4])
 	ft_printf("************************************\n");
 }
 
+void	print_state_8int(int a, int b, int c, int d, int e, int f, int g, int h)
+{
+	ft_printf("\n********** Display State 8: **********\n");
+	ft_printf("%c: %#.8x\n", (int)('A'), a);
+	ft_printf("%c: %#.8x\n", (int)('B'), b);
+	ft_printf("%c: %#.8x\n", (int)('C'), c);
+	ft_printf("%c: %#.8x\n", (int)('D'), d);
+	ft_printf("%c: %#.8x\n", (int)('E'), e);
+	ft_printf("%c: %#.8x\n", (int)('F'), f);
+	ft_printf("%c: %#.8x\n", (int)('G'), g);
+	ft_printf("%c: %#.8x\n", (int)('H'), h);
+	ft_printf("**************************************\n\n");
+}
+
 void	print_state_4int(int a, int b, int c, int d)
 {
-	ft_printf("\n********** Display State: **********\n");
+	ft_printf("\n********** Display State 4: **********\n");
 	ft_printf("%c: %#.8x\n", (int)('A'), a);
 	ft_printf("%c: %#.8x\n", (int)('B'), b);
 	ft_printf("%c: %#.8x\n", (int)('C'), c);

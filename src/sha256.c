@@ -19,6 +19,7 @@
          Pour t = 16 à 63
             Wt = SSIG1 (W (t-2)) + W (t-7) + SSIG0 (w (t-15)) + W (t-16)
 */
+
 void			message_schedule256(uint32_t *block, uint32_t w[64])
 {
 	int	t;
@@ -27,8 +28,10 @@ void			message_schedule256(uint32_t *block, uint32_t w[64])
 	while (++t < 16)
 		w[t] = reverse(block[t]);
 	t--;
+	// while (++t < 64)
+	// 	w[t] = ssig1(w[t - 2]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
 	while (++t < 64)
-		w[t] = ssig1(w[t - 1]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
+		w[t] = ssig1(w[t - 2]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
 }
 
 void			init_work_variable256(uint32_t alp[8])
@@ -60,7 +63,7 @@ void			sha_transform256(uint32_t *block)
 	uint32_t	w[64];
 	uint32_t	alp[8];
 	uint32_t	t1, t2;
-	uint8_t 	i;
+	// uint8_t 	i;
 
 	ft_printf("Sha_transform256()\n");
 	print_block((char *)block);
@@ -71,8 +74,9 @@ void			sha_transform256(uint32_t *block)
 	init_work_variable256(alp);
 	print_state_sha256(alp);
 
-	i = 0;
-	while (i < 64)
+	// i = 0;
+	// while (i < 64)
+	for (int i = 0; i < 64; i++)
 	{
 		t1 = alp[7] + bsig1(alp[4]) + ch(alp[4], alp[5], alp[6])+ g_kk[i] + w[i];
 		t2 = bsig0(alp[0]) + maj(alp[0], alp[1], alp[2]);
@@ -84,7 +88,8 @@ void			sha_transform256(uint32_t *block)
 		alp[2] = alp[1];
 		alp[1] = alp[0];
 		alp[0] = t1 + t2;
-		i++;
+		ft_printf("\nI = [%d] / t1[%#.8x] / t2[%#.8x]", i, t1, t2);
+		print_state_sha256(alp);
 	}
 
 	compute_inter_hash(alp);

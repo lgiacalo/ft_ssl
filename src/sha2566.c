@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include "sha256.h"
+#include "ft_ssl.h"
 
 /****************************** MACROS ******************************/
 #define ROTLEFT(a,b) (((a) << (b)) | ((a) >> (32-(b))))
@@ -29,7 +30,7 @@
 #define SIG1(x) (ROTRIGHT(x,17) ^ ROTRIGHT(x,19) ^ ((x) >> 10))
 
 /**************************** VARIABLES *****************************/
-static const WORD k[64] = {
+static const WORD kk[64] = {
 	0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
 	0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
 	0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
@@ -50,6 +51,8 @@ void sha256_transform(SHA256_CTX *ctx, const BYTE data[])
 	for ( ; i < 64; ++i)
 		m[i] = SIG1(m[i - 2]) + m[i - 7] + SIG0(m[i - 15]) + m[i - 16];
 
+	print_uint32_64(m);
+
 	a = ctx->state[0];
 	b = ctx->state[1];
 	c = ctx->state[2];
@@ -59,8 +62,9 @@ void sha256_transform(SHA256_CTX *ctx, const BYTE data[])
 	g = ctx->state[6];
 	h = ctx->state[7];
 
+	print_state_sha256(ctx->state);
 	for (i = 0; i < 64; ++i) {
-		t1 = h + EP1(e) + CH(e,f,g) + k[i] + m[i];
+		t1 = h + EP1(e) + CH(e,f,g) + kk[i] + m[i];
 		t2 = EP0(a) + MAJ(a,b,c);
 		h = g;
 		g = f;
@@ -70,6 +74,8 @@ void sha256_transform(SHA256_CTX *ctx, const BYTE data[])
 		c = b;
 		b = a;
 		a = t1 + t2;
+		ft_printf("\nI = [%d] / t1[%#.8x] / t2[%#.8x]", i, t1, t2);
+		print_state_8int(a, b, c, d, e, f, g, h);
 	}
 
 	ctx->state[0] += a;

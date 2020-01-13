@@ -43,7 +43,7 @@ int		main(int argc, char **argv)
 	g_hash[getssl()->f].func(argv, argc);
 
 
-	sha256_test();
+// printf("SHA-256 tests: %s\n", sha256_test() ? "SUCCEEDED" : "FAILED");
 
 	return (0);
 }
