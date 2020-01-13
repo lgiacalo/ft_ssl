@@ -35,6 +35,7 @@ SRC_SSL		= main.c struct_ssl.c\
 				md5.c functions_md5.c\
 				reverse.c math_utils.c\
 				display.c print.c print_info.c\
+				functions_logique_sha32b.c\
 				md5_real.c
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))

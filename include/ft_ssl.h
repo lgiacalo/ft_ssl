@@ -65,7 +65,7 @@ typedef struct					s_hash
 	char 						*name;
 }								t_hash;
 
-static t_hash g_hash[] =
+static t_hash					g_hash[] =
 {
 	{record_md5, "md5"},
 	// {record_sha256, "sha256"},
@@ -80,17 +80,15 @@ t_ssl							*getssl(void);
 void							init_ssl(void);
 void							clean_ssl(void);
 
-
 /*
 **	Reverse
 */
 
-int								rotate_left(unsigned int x, int n);
-int								rotate_right(unsigned int x, int n);
+uint32_t						rotate_left(uint32_t x, int n);
+uint32_t						rotate_right(uint32_t x, int n);
 
 unsigned int					reverse(unsigned int block);
 void							reverse_block(unsigned int *block);
-
 
 /*
 **	Print Error
@@ -106,14 +104,14 @@ int								print_no_file(char *str);
 **	Print structure
 */
 
-void	print_ssl(void);
-void	print_all(void);
-void	print_sizeof(void);
-void	print_block(char *block);
-void	print_state(unsigned int state[4]);
-void	print_state_4int(int a, int b, int c, int d);
-void	print_sinus(void);
-void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
-void	print_info_func(unsigned int state[4], int x, int i, int s, int sin);
+void							print_ssl(void);
+void							print_all(void);
+void							print_sizeof(void);
+void							print_block(char *block);
+void							print_state(unsigned int state[4]);
+void							print_state_4int(int a, int b, int c, int d);
+void							print_sinus(void);
+void							print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
+void							print_info_func(unsigned int state[4], int x, int i, int s, int sin);
 
 #endif

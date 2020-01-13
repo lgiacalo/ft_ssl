@@ -18,20 +18,20 @@
 # define STATE2					0x98badcfe
 # define STATE3					0x10325476
 
-static unsigned char PADDING[64] = {
- 0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
- 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
- 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+static unsigned char			PADDING[64] = {
+	0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-static int r[64] = {
-	7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,
-	5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,
-	4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,
-	6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21
+static int						r[64] = {
+	7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+	5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
+	4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+	6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
 };
 
-static unsigned int k[64] = {
+static unsigned int				k[64] = {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
 	0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
 	0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
@@ -54,7 +54,6 @@ static unsigned int k[64] = {
 **	Parsing
 */
 
-
 void							record_md5(char **argv, int argc);
 int								record_option(char *str);
 
@@ -72,17 +71,19 @@ int								gestion_stdin(void);
 **	Functions non lineaire MD5
 */
 
-int 							func_f(int b, int c, int d);
-int 							func_g(int b, int c, int d);
-int 							func_h(int b, int c, int d);
-int 							func_i(int b, int c, int d);
+int								func_f(int b, int c, int d);
+int								func_g(int b, int c, int d);
+int								func_h(int b, int c, int d);
+int								func_i(int b, int c, int d);
 
 /*
 **	Gestion MD5
 */
 
-void							gestion_block(char *block, unsigned int size, int add);
-void							gestion_last_block(char *block, unsigned int size);
+void							gestion_block(char *block, unsigned int size,
+	int add);
+void							gestion_last_block(char *block,
+	unsigned int size);
 void							md5_transform(unsigned int *block);
 void							display_hash(char *name);
 

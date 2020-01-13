@@ -12,12 +12,12 @@
 
 #include "ft_ssl.h"
 
-int	rotate_left(unsigned int x, int n)
+uint32_t	rotate_left(uint32_t x, int n)
 {
 	return (((x) << (n)) | ((x) >> (32 - (n))));
 }
 
-int	rotate_right(unsigned int x, int n)
+uint32_t	rotate_right(uint32_t x, int n)
 {
 	return (((x) >> (n)) | ((x) << (32 - (n))));
 }
