@@ -13,6 +13,15 @@
 #ifndef FT_SHA_H
 # define FT_SHA_H
 
+# define STATE00				0x6a09e667
+# define STATE11				0xbb67ae85
+# define STATE22				0x3c6ef372
+# define STATE33				0xa54ff53a
+# define STATE44				0x510e527f
+# define STATE55				0x9b05688c
+# define STATE66				0x1f83d9ab
+# define STATE77				0x5be0cd19
+
 static uint32_t		g_kk[64] = {
 	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
 	0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
@@ -27,11 +36,32 @@ static uint32_t		g_kk[64] = {
 	0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
 };
 
+typedef struct					s_sha
+{
+	char						*cmd;
+	int							opt;
+	int							ret;
+	int							f;
+	unsigned int 				state[8];
+	long int 					size;
+	char						buf[64];
+	// char						buff[SIZE_READ];
+}								t_sha;
+
+
 /*
 **	Prototypes
 */
 
 void				record_sha256(char **argv, int argc);
+
+/*
+**	Function structure sha
+*/
+
+t_sha	*getsha(void);
+void	clean_sha(void);
+void	init_sha(void);
 
 /*
 **	Fonctions logiques - 32 BITS
