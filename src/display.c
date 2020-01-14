@@ -16,19 +16,10 @@ void	print_hash(unsigned int state[], int ind)
 {
 	int	i;
 
-	i = 0;
-	while (i < ind)
-	{
-		ft_printf("%.8x ", state[i]);
-		i++;
-	}
+	i = -1;
+	while (++i < ind)
+		ft_printf("%.8x", state[i]);
 }
-
-// void	print_hash(unsigned int state[4])
-// {
-// 	ft_printf("%.8x%.8x%.8x%.8x", state[0], \
-// 		state[1], state[2], state[3]);
-// }
 
 void	display_hash(char *name)
 {
@@ -54,9 +45,6 @@ void	display_hash(char *name)
 	clean_ssl();
 }
 
-
-
-
 void	display_hash256(char *name)
 {
 	t_sha	*sha;
@@ -74,7 +62,7 @@ void	display_hash256(char *name)
 	}
 	else
 	{
-		ft_printf("MD5 (%c%s%c) = ", c, name, c);
+		ft_printf("SHA256(%c%s%c)= ", c, name, c);
 		print_hash(sha->state, 8);
 	}
 	ft_printf("\n");

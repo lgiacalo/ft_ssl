@@ -53,22 +53,16 @@ void			sha_transform256(uint32_t *block)
 	uint32_t	w[64];
 	uint32_t	alp[8];
 	uint32_t	t1, t2;
-	// uint8_t 	i;
+	uint8_t 	i;
 
-	// ft_printf("Sha_transform256()\n");
-	// print_block((char *)block);
 	sha = getsha();
 	message_schedule256(block, w);
-	// print_uint32_64(w);
-
 	init_work_variable256(alp);
-	// print_state_sha256(alp);
-
-	// i = 0;
-	// while (i < 64)
-	for (int i = 0; i < 64; i++)
+	i = -1;
+	while (++i < 64)
 	{
-		t1 = alp[7] + bsig1(alp[4]) + ch(alp[4], alp[5], alp[6])+ g_kk[i] + w[i];
+		t1 = alp[7] + bsig1(alp[4]) + ch(alp[4], alp[5], alp[6])
+		+ g_kk[i] + w[i];
 		t2 = bsig0(alp[0]) + maj(alp[0], alp[1], alp[2]);
 		alp[7] = alp[6];
 		alp[6] = alp[5];
@@ -78,12 +72,8 @@ void			sha_transform256(uint32_t *block)
 		alp[2] = alp[1];
 		alp[1] = alp[0];
 		alp[0] = t1 + t2;
-		// ft_printf("\nI = [%d] / t1[%#.8x] / t2[%#.8x]", i, t1, t2);
-		// print_state_sha256(alp);
 	}
-
 	compute_inter_hash(alp);
-	// print_state_sha256(getsha()->state);
 }
 
 void			gestion_last_block256(char *block, unsigned int size)
@@ -118,13 +108,11 @@ void			gestion_block256(char *block, unsigned int size, int add)
 	unsigned int	i;
 
 	ft_printf("\nGestion block sha256 - size[%d]\n", size);
-	// print_block(block);
 	sha = getsha();
 	sha->size += size;
 	i = 0;
 	while ((i + add) < size)
 	{
-		// ft_printf("dans la boucle - gestion block sha256\n");
 		sha_transform256((uint32_t *)(&(block[i])));
 		i += 64;
 	}
