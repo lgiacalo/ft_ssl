@@ -46,6 +46,8 @@ void sha256_transform(SHA256_CTX *ctx, const BYTE data[])
 {
 	WORD a, b, c, d, e, f, g, h, i, j, t1, t2, m[64];
 
+
+	print_block((char *)data);
 	for (i = 0, j = 0; i < 16; ++i, j += 4)
 		m[i] = (data[j] << 24) | (data[j + 1] << 16) | (data[j + 2] << 8) | (data[j + 3]);
 	for ( ; i < 64; ++i)
@@ -100,6 +102,8 @@ void sha256_init(SHA256_CTX *ctx)
 	ctx->state[5] = 0x9b05688c;
 	ctx->state[6] = 0x1f83d9ab;
 	ctx->state[7] = 0x5be0cd19;
+	printf("In sha256 init\n");
+	print_state_sha256(ctx->state);
 }
 
 void sha256_update(SHA256_CTX *ctx, const BYTE data[], size_t len)
@@ -123,6 +127,7 @@ void sha256_final(SHA256_CTX *ctx, BYTE hash[])
 
 	i = ctx->datalen;
 
+	printf("Sha256 final\n");
 	// Pad whatever data is left in the buffer.
 	if (ctx->datalen < 56) {
 		ctx->data[i++] = 0x80;
@@ -133,6 +138,7 @@ void sha256_final(SHA256_CTX *ctx, BYTE hash[])
 		ctx->data[i++] = 0x80;
 		while (i < 64)
 			ctx->data[i++] = 0x00;
+		printf("re Call sha256 in sha256");
 		sha256_transform(ctx, ctx->data);
 		memset(ctx->data, 0, 56);
 	}

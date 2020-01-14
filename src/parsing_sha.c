@@ -57,28 +57,57 @@ static int		gestion_stdin_sha(void)
 	return (0);
 }
 
+int	gestion_string256(char *str)
+{
+	size_t	size;
+
+	size = ft_strlen(str);
+	gestion_block256(str, size, 63);
+	gestion_last_block256(str, size);
+	display_hash256(str);
+	return (0);
+}
+
+int	read_string_option256(char *str)
+{
+	if (str && !(str[1]))
+		return (-1);
+	else
+		gestion_string256(str + 1);
+	return (0);
+}
+
+int	read_string256(char *str)
+{
+	if (!str)
+		return (print_requires_args('s'));
+	gestion_string256(str);
+	return (0);
+}
+
+
 // /*
 // **	si -pp alors entre standard + ""
 // */
 
-// static int		record_option(char *str)
-// {
-// 	int	i;
-// 	int	ind;
+static int		record_option256(char *str)
+{
+	int	i;
+	int	ind;
 
-// 	i = 0;
-// 	while (str && str[++i])
-// 	{
-// 		if ((ind = ft_chrstr_ind(str[i], OPT_STR)) < 0)
-// 			return (print_illegal_option(str[i]));
-// 		getssl()->opt |= (1 << ind);
-// 		if (str[i] == 'p')
-// 			gestion_stdin();
-// 		else if (str[i] == 's')
-// 			return (read_string_option(str + i));
-// 	}
-// 	return (0);
-// }
+	i = 0;
+	while (str && str[++i])
+	{
+		if ((ind = ft_chrstr_ind(str[i], OPT_STR)) < 0)
+			return (print_illegal_option(str[i]));
+		getsha()->opt |= (1 << ind);
+		if (str[i] == 'p')
+			gestion_stdin_sha();
+		else if (str[i] == 's')
+			return (read_string_option256(str + i));
+	}
+	return (0);
+}
 
 void	record_sha256(char **argv, int argc)
 {
@@ -92,8 +121,8 @@ void	record_sha256(char **argv, int argc)
 	{
 		if (opt && argv[i][0] == '-')
 		{
-			if (record_option(argv[i]) == -1)
-				read_string(argv[++i]);
+			if (record_option256(argv[i]) == -1)
+				read_string256(argv[++i]);
 		}
 		else
 		{

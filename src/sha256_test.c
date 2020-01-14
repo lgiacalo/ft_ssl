@@ -17,10 +17,34 @@
 #include <string.h>
 #include "sha256.h"
 
-/*********************** FUNCTION DEFINITIONS ***********************/
-int sha256_test()
+unsigned int	revv(unsigned int block)
 {
-	BYTE text1[] = {"abc"};
+	unsigned int ret;
+
+	ret = 0;
+	ret += block << 24 & 0xff000000;
+	ret += block << 8 & 0x00ff0000;
+	ret += block >> 8 & 0x000ff00;
+	ret += block >> 24 & 0xff;
+	return (ret);
+}
+
+void	print(unsigned int state[], int ind)
+{
+	int	i;
+
+	i = 0;
+	while (i < ind)
+	{
+		printf("%.8x ", revv(state[i]));
+		i++;
+	}
+}
+
+/*********************** FUNCTION DEFINITIONS ***********************/
+int sha256_test(char **argv)
+{
+	// BYTE text1[] = {"abc"};
 	BYTE text2[] = {"abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"};
 	BYTE text3[] = {"aaaaaaaaaa"};
 	BYTE hash1[SHA256_BLOCK_SIZE] = {0xba,0x78,0x16,0xbf,0x8f,0x01,0xcf,0xea,0x41,0x41,0x40,0xde,0x5d,0xae,0x22,0x23,
@@ -34,11 +58,19 @@ int sha256_test()
 	int idx;
 	int pass = 1;
 
-	sha256_init(&ctx);
-	sha256_update(&ctx, text1, strlen(text1));
-	sha256_final(&ctx, buf);
-	pass = pass && !memcmp(hash1, buf, SHA256_BLOCK_SIZE);
 
+	BYTE text1[] = {"abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopqabcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq"};
+
+
+	sha256_init(&ctx);
+	// sha256_update(&ctx, text2, strlen(text2));
+	sha256_update(&ctx, argv[3], strlen(argv[3]));
+	sha256_final(&ctx, buf);
+	pass = pass && !memcmp(hash2, buf, SHA256_BLOCK_SIZE);
+
+
+	printf("Hash : ");
+	print(buf, 8);
 	// sha256_init(&ctx);
 	// sha256_update(&ctx, text2, strlen(text2));
 	// sha256_final(&ctx, buf);

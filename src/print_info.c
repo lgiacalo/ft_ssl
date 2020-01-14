@@ -65,15 +65,16 @@ void	print_state_sha256(unsigned int state[8])
 {
 	ft_printf("\n******** Display State[8] SHA : ********\n");
 	for (int i = 0; i < 8; i++)
-		ft_printf("%c: %#.8x\n", (int)('A') + i, state[i]);
-	ft_printf("****************************************\n\n");
+		ft_printf("%c: %#.8x ", (int)('A') + i, state[i]);
+	// ft_printf("\n****************************************\n");
+	ft_printf("\n");
 }
 
 void	print_state(unsigned int state[4])
 {
 	ft_printf("\n********** Display State: **********\n");
 	for (int i = 0; i < 4; i++)
-		ft_printf("%c: %#.8x\n", (int)('A') + i, state[i]);
+		ft_printf("%c: %#.8x", (int)('A') + i, state[i]);
 	ft_printf("************************************\n");
 	ft_printf("************************************\n");
 }
@@ -81,15 +82,16 @@ void	print_state(unsigned int state[4])
 void	print_state_8int(int a, int b, int c, int d, int e, int f, int g, int h)
 {
 	ft_printf("\n********** Display State 8: **********\n");
-	ft_printf("%c: %#.8x\n", (int)('A'), a);
-	ft_printf("%c: %#.8x\n", (int)('B'), b);
-	ft_printf("%c: %#.8x\n", (int)('C'), c);
-	ft_printf("%c: %#.8x\n", (int)('D'), d);
-	ft_printf("%c: %#.8x\n", (int)('E'), e);
-	ft_printf("%c: %#.8x\n", (int)('F'), f);
-	ft_printf("%c: %#.8x\n", (int)('G'), g);
-	ft_printf("%c: %#.8x\n", (int)('H'), h);
-	ft_printf("**************************************\n\n");
+	ft_printf("%c: %#.8x ", (int)('A'), a);
+	ft_printf("%c: %#.8x ", (int)('B'), b);
+	ft_printf("%c: %#.8x ", (int)('C'), c);
+	ft_printf("%c: %#.8x ", (int)('D'), d);
+	ft_printf("%c: %#.8x ", (int)('E'), e);
+	ft_printf("%c: %#.8x ", (int)('F'), f);
+	ft_printf("%c: %#.8x ", (int)('G'), g);
+	ft_printf("%c: %#.8x ", (int)('H'), h);
+	ft_printf("\n");
+	// ft_printf("\n**************************************\n");
 }
 
 void	print_state_4int(int a, int b, int c, int d)
