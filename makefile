@@ -36,12 +36,11 @@ SRC_SSL		= main.c struct_ssl.c\
 				reverse.c math_utils.c\
 				display.c print.c print_info.c\
 				functions_logique_sha32b.c\
-				sha256.c parsing_sha.c struct_sha.c\
-				sha2566.c sha256_test.c
+				sha256.c parsing_sha.c struct_sha.c
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))
 
-INC_SSL		= ft_ssl.h ft_md5.h ft_sha.h sha256.h
+INC_SSL		= ft_ssl.h ft_md5.h ft_sha.h
 
 LIB		= libft/libft.a
 

@@ -21,7 +21,6 @@
 # include "libft.h"
 # include "ft_md5.h"
 # include "ft_sha.h"
-# include "sha256.h"
 
 /*
 **	COMMANDS
@@ -121,6 +120,5 @@ void							print_sinus(void);
 void							print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
 void							print_info_func(unsigned int state[4], int x, int i, int s, int sin);
 
-int 							sha256_test(char **argv);
 
 #endif

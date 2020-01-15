@@ -114,7 +114,7 @@ void			gestion_block256(char *block, unsigned int size, int add)
 	while ((i + add) < size)
 	{
 		sha_transform256((uint32_t *)(&(block[i])));
-		i += 64;
+		i += add + 1;
 	}
 }
 
