@@ -27,9 +27,12 @@
 */
 
 # define CMD_MD5				"md5"
+# define CMD_SHA224				"sha224"
 # define CMD_SHA256				"sha256"
+# define CMD_SHA384				"sha384"
+# define CMD_SHA512				"sha512"
 
-# define NB_HASH				2
+# define NB_HASH				5
 /*
 **	OPTIONS
 */
@@ -45,7 +48,7 @@
 **	Constantes
 */
 
-# define SIZE_READ				512
+# define SIZE_READ				1024
 
 typedef struct					s_ssl
 {
@@ -67,7 +70,10 @@ typedef struct					s_hash
 static t_hash					g_hash[] =
 {
 	{record_md5, "md5"},
+	{record_sha, "sha224"},
 	{record_sha, "sha256"},
+	{record_sha, "sha384"},
+	{record_sha, "sha512"},
 	{NULL, NULL}
 };
 

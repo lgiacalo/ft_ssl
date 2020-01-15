@@ -35,7 +35,7 @@ void	clean_sha(void)
 	sha->state[7] = STATE77;
 	sha->size = 0;
 	sha->opt &= 18;
-	// ft_bzero(sha->buf, 64);
+	ft_bzero(sha->buf, 64);
 }
 
 void	init_sha(void)
@@ -56,5 +56,5 @@ void	init_sha(void)
 	sha->state[6] = STATE66;
 	sha->state[7] = STATE77;
 	sha->size = 0;
-	// ft_bzero(ssha>buf, 64);
+	ft_bzero(sha->buf, 64);
 }

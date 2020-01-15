@@ -45,7 +45,6 @@ typedef struct					s_sha
 	uint32_t	 				state[8];
 	uint64_t 					size;
 	char						buf[64];
-	// char						buff[SIZE_READ];
 }								t_sha;
 
 
