@@ -29,14 +29,13 @@ SPY			= @
 SRC_PATH	= ./src/
 INC_PATH	= ./include/
 
-SRC_SSL		= main.c struct_ssl.c\
-				parsing.c\
+SRC_SSL		= main.c struct_ssl.c struct_sha.c\
 				read_string.c read_file.c\
-				md5.c functions_md5.c\
+				parsing.c md5.c functions_md5.c\
 				reverse.c math_utils.c\
 				display.c print.c print_info.c\
-				functions_logique_sha32b.c\
-				sha256.c parsing_sha.c struct_sha.c
+				functions_sha32b.c sha256.c parsing_sha.c\
+				
 
 OBJ_SSL		= $(addprefix $(SRC_PATH), $(SRC_SSL:%.c=%.o))
 

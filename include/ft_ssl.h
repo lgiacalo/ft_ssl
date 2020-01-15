@@ -116,6 +116,7 @@ void							print_state_8int(int a, int b, int c, int d, int e, int f, int g, int
 
 
 void							print_ssl(void);
+void							print_sha(void);
 void							print_all(void);
 void							print_sizeof(void);
 void							print_block(char *block);

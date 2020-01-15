@@ -45,14 +45,14 @@ static void	read_stdin_sha(char *buff)
 
 static int		gestion_stdin_sha(void)
 {
-	t_ssl	*ssl;
+	t_sha	*sha;
 	char	buff[SIZE_READ];
 
-	ssl = getssl();
-	if (ssl->opt & OPT_PP)
+	sha = getsha();
+	if (sha->opt & OPT_PP)
 		return (gestion_string(""));
-	ssl->opt |= (1 << 4);
-	ssl->opt |= (1 << 0);
+	sha->opt |= (1 << 4);
+	sha->opt |= (1 << 0);
 	read_stdin_sha(buff);
 	display_hash256(NULL);
 	return (0);

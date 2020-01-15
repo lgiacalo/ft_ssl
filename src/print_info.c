@@ -17,6 +17,23 @@ void	print_all(void)
 	print_ssl();
 }
 
+void	print_sha(void)
+{
+	t_sha	*sha;
+
+	sha = getsha();
+	ft_printf("\n*********** Structure: s_sha **********\n");
+	ft_printf("Cmd:\t\t%s\n", sha->cmd);
+	ft_printf("Version:\t%d\n", sha->version);
+	ft_printf("Opt:\t\t%.4b\n", sha->opt);
+	ft_printf("Ret:\t\t%i\n", sha->ret);
+	ft_printf("State[4]:\t%#llx - %#llx - %#llx - %#llx\n", sha->state[0], sha->state[1], sha->state[2], sha->state[3]);
+	ft_printf("Size:\t\t%i\n", sha->size);
+	ft_printf("Len msg:\t%i\n", sha->len_msg);
+	ft_printf("Len size:\t%i\n", sha->len_size);
+	ft_printf("***************************************\n");
+}
+
 void	print_ssl(void)
 {
 	t_ssl	*ssl;

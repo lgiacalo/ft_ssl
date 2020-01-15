@@ -32,6 +32,7 @@ int	read_arguments(char *arg)
 		ft_bzero(buff, SIZE_READ);
 	}
 	close(fd);
+	print_ssl();
 	display_hash(arg);
 	return (0);
 }
