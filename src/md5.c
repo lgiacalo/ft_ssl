@@ -91,6 +91,6 @@ void			gestion_block(char *block, unsigned int size, int add)
 	while ((i + add) < size)
 	{
 		md5_transform((unsigned int *)(&(block[i])));
-		i += add + 1;
+		i += 64;
 	}
 }
