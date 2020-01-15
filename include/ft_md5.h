@@ -57,8 +57,8 @@ int								gestion_string(char *str);
 int								read_arguments(char *arg);
 int								record_commands(char *cmd);
 
-void							read_stdin(char *buff);
-int								gestion_stdin(void);
+void							read_stdin(char *buff, int p);
+int								gestion_stdin(int p);
 
 /*
 **	Functions non lineaire MD5

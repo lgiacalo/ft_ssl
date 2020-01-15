@@ -3,3 +3,4 @@ libft/libft.a
 libft/obj
 src/*.o
 .gdb_history
+.file_*

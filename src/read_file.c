@@ -20,7 +20,7 @@ int	read_arguments(char *arg)
 	char	buff[SIZE_READ];
 	size_t	size;
 
-	if ((fd = open(arg, 'r')) == -1)
+	if ((fd = open(arg, O_RDONLY)) == -1)
 		return (print_no_file(arg));
 	while ((size = read(fd, buff, SIZE_READ)) >= 0)
 	{

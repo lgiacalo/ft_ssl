@@ -39,7 +39,7 @@ void	display_hash(char *name)
 	}
 	else
 	{
-		ft_printf("MD5 (%c%s%c) = ", c, name, c);
+		ft_printf("MD5(%c%s%c)= ", c, name, c);
 		print_hash(ssl->state, 4);
 	}
 	ft_printf("\n");

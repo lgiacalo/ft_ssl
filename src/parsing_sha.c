@@ -14,7 +14,7 @@
 #include "ft_sha.h"
 #include <fcntl.h>
 
-static void	read_stdin_sha(char *buff)
+static void	read_stdin_sha(char *buff, int p)
 {
 	char	*tmp;
 	size_t	size;
@@ -27,6 +27,7 @@ static void	read_stdin_sha(char *buff)
 		size_tt += size;
 		if (size_tt == SIZE_READ || !size)
 		{
+			(p) ? write(1, buff, size_tt) : 0;
 			gestion_block256(buff, size_tt, (!size) ? 63 : 0);
 			if (!size)
 			{
@@ -42,7 +43,7 @@ static void	read_stdin_sha(char *buff)
 	}
 }
 
-static int	gestion_stdin_sha(void)
+static int	gestion_stdin_sha(int p)
 {
 	t_sha	*sha;
 	char	buff[SIZE_READ];
@@ -52,7 +53,7 @@ static int	gestion_stdin_sha(void)
 		return (gestion_string256(""));
 	sha->opt |= (1 << 4);
 	sha->opt |= (1 << 0);
-	read_stdin_sha(buff);
+	read_stdin_sha(buff, p);
 	display_hash256(NULL);
 	return (0);
 }
@@ -73,7 +74,7 @@ static int	record_option256(char *str)
 			return (print_illegal_option(str[i]));
 		getsha()->opt |= (1 << ind);
 		if (str[i] == 'p')
-			gestion_stdin_sha();
+			gestion_stdin_sha(1);
 		else if (str[i] == 's')
 			return (read_string_option256(str + i));
 	}
@@ -103,5 +104,5 @@ void		record_sha(char **argv, int argc)
 		i++;
 	}
 	if (argc == 2)
-		gestion_stdin_sha();
+		gestion_stdin_sha(0);
 }

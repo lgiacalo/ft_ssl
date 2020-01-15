@@ -13,7 +13,7 @@
 #include "ft_ssl.h"
 #include "ft_md5.h"
 
-void	read_stdin(char *buff)
+void	read_stdin(char *buff, int p)
 {
 	char	*tmp;
 	size_t	size;
@@ -26,6 +26,7 @@ void	read_stdin(char *buff)
 		size_tt += size;
 		if (size_tt == SIZE_READ || !size)
 		{
+			(p) ? write(1, buff, size_tt) : 0;
 			gestion_block(buff, size_tt, (!size) ? 63 : 0);
 			if (!size)
 			{
@@ -41,7 +42,7 @@ void	read_stdin(char *buff)
 	}
 }
 
-int		gestion_stdin(void)
+int		gestion_stdin(int p)
 {
 	t_ssl	*ssl;
 	char	buff[SIZE_READ];
@@ -51,7 +52,7 @@ int		gestion_stdin(void)
 		return (gestion_string(""));
 	ssl->opt |= (1 << 4);
 	ssl->opt |= (1 << 0);
-	read_stdin(buff);
+	read_stdin(buff, p);
 	display_hash(NULL);
 	return (0);
 }
@@ -72,7 +73,7 @@ int		record_option(char *str)
 			return (print_illegal_option(str[i]));
 		getssl()->opt |= (1 << ind);
 		if (str[i] == 'p')
-			gestion_stdin();
+			gestion_stdin(1);
 		else if (str[i] == 's')
 			return (read_string(str + i, 0));
 	}
@@ -101,5 +102,5 @@ void	record_md5(char **argv, int argc)
 		i++;
 	}
 	if (argc == 2)
-		gestion_stdin();
+		gestion_stdin(0);
 }
