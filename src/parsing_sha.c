@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_sha.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,28 +14,29 @@
 #include "ft_sha.h"
 #include <fcntl.h>
 
-static void	read_stdin_sha(char *buff, int p)
+
+static void	read_stdin_sha(char *b, int p)
 {
 	char	*tmp;
 	size_t	size;
 	size_t	size_tt;
 
 	size_tt = 0;
-	tmp = (char *)buff;
+	tmp = (char *)b;
 	while ((size = read(0, tmp, SIZE_READ - size_tt)) >= 0)
 	{
 		size_tt += size;
 		if (size_tt == SIZE_READ || !size)
 		{
-			(p) ? write(1, buff, size_tt) : 0;
-			gestion_block256(buff, size_tt, (!size) ? 63 : 0);
+			(p) ? write(1, b, size_tt) : 0;
+			gestion_block256(b, size_tt, (!size) ? getsha()->len_msg - 1 : 0);
 			if (!size)
 			{
-				gestion_last_block256(buff, size_tt);
+				gestion_last_block256(b, size_tt);
 				break ;
 			}
-			ft_bzero(buff, SIZE_READ);
-			tmp = (char *)buff;
+			ft_bzero(b, SIZE_READ);
+			tmp = (char *)b;
 			size_tt = 0;
 		}
 		else
