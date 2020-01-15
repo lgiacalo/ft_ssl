@@ -150,6 +150,7 @@ int								print_no_file(char *str);
 */
 void							print_uint64_80(uint64_t w[80]);
 void							print_state_sha512(uint64_t state[8]);
+void							print_block128(char *block);
 
 
 

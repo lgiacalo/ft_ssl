@@ -97,6 +97,9 @@ int					read_string256(char *str);
 int					read_string_option256(char *str);
 int					gestion_string256(char *str);
 
+void				read_stdin_sha512(char *b, int p);
+
+
 void				init_state_sha224(uint32_t state[8]);
 void				init_state_sha256(uint32_t state[8]);
 

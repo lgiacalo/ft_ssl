@@ -51,10 +51,10 @@ static int	gestion_stdin_sha(int p)
 
 	sha = getsha();
 	if (sha->opt & OPT_PP)
-		return (gestion_string256(""));
+		return (gestion_string256("")); //ici
 	sha->opt |= (1 << 4);
 	sha->opt |= (1 << 0);
-	read_stdin_sha(buff, p);
+	(sha->len_msg == 64) ? read_stdin_sha(buff, p) : read_stdin_sha512(buff, p);
 	display_hash256(NULL);
 	return (0);
 }

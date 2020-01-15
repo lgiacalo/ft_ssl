@@ -38,6 +38,21 @@ void	print_uint32_64(uint32_t w[64])
 	ft_printf("\n***************************************\n");
 }
 
+void	print_block128(char *block)
+{
+	if (!block)
+		return ;
+	ft_printf("\n**************** Display Block: ****************\n");
+	for (int i = 0; i < 128; i++)
+	{
+		if (i && !(i % 32))
+			ft_printf("\n");
+		ft_printf("%.2x ", (unsigned char)block[i]);
+	}
+	ft_printf("\n************************************************\n");
+	ft_printf("\n");
+}
+
 void	print_all(void)
 {
 	print_ssl();
