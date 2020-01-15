@@ -55,7 +55,6 @@ typedef struct					s_sha
 **	Prototypes
 */
 
-void				record_sha(char **argv, int argc);
 int					read_arguments_sha(char *arg);
 
 int					read_string256(char *str);
@@ -69,16 +68,6 @@ int					gestion_string256(char *str);
 t_sha				*getsha(void);
 void				clean_sha(void);
 void				init_sha(void);
-
-/*
-**	Gestion sha256
-*/
-
-void			gestion_block256(char *block, unsigned int size, int add);
-void			gestion_last_block256(char *block, unsigned int size);
-
-void			display_hash256(char *name);
-
 
 /*
 **	Fonctions logiques - 32 BITS

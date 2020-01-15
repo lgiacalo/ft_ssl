@@ -1,4 +1,5 @@
 #include "ft_ssl.h"
+#include "ft_sha.h"
 
 void	print_uint32_64(uint32_t w[64])
 {
@@ -120,18 +121,6 @@ void	print_state_4int(int a, int b, int c, int d)
 	ft_printf("%c: %#.8x\n", (int)('D'), d);
 	ft_printf("**************************************\n\n");
 	ft_printf("************************************\n");
-}
-
-void	print_sinus(void)
-{
-	ft_printf("\n********************** Display State: **********************\n");
-	for (int i = 0; i < 64; i++)
-	{
-		if (i && !(i % 16))
-			ft_printf("\n");
-		ft_printf("%#.8x ", k[i]);
-	}
-	ft_printf("\n***********************************************************\n\n");
 }
 
 void	print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin)

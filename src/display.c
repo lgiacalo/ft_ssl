@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "ft_sha.h"
 
 void	print_hash(unsigned int state[], int ind)
 {

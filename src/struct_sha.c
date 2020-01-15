@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "ft_sha.h"
 
 t_sha	*getsha(void)
 {
@@ -18,7 +19,6 @@ t_sha	*getsha(void)
 
 	return (&sha);
 }
-
 
 void	clean_sha(void)
 {

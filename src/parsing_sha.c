@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "ft_sha.h"
 #include <fcntl.h>
 
 static void	read_stdin_sha(char *buff)
@@ -50,7 +51,7 @@ static int		gestion_stdin_sha(void)
 
 	sha = getsha();
 	if (sha->opt & OPT_PP)
-		return (gestion_string(""));
+		return (gestion_string256(""));
 	sha->opt |= (1 << 4);
 	sha->opt |= (1 << 0);
 	read_stdin_sha(buff);

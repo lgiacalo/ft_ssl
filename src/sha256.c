@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "ft_sha.h"
 
 void			message_schedule256(uint32_t *block, uint32_t w[64])
 {

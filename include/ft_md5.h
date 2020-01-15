@@ -18,12 +18,6 @@
 # define STATE2					0x98badcfe
 # define STATE3					0x10325476
 
-static unsigned char			PADDING[64] = {
-	0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-};
-
 static int						r[64] = {
 	7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
 	5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
@@ -54,7 +48,6 @@ static unsigned int				k[64] = {
 **	Parsing
 */
 
-void							record_md5(char **argv, int argc);
 int								record_option(char *str);
 
 int								read_string(char *str, int opt);
@@ -75,16 +68,5 @@ int								func_f(int b, int c, int d);
 int								func_g(int b, int c, int d);
 int								func_h(int b, int c, int d);
 int								func_i(int b, int c, int d);
-
-/*
-**	Gestion MD5
-*/
-
-void							gestion_block(char *block, unsigned int size,
-	int add);
-void							gestion_last_block(char *block,
-	unsigned int size);
-void							md5_transform(unsigned int *block);
-void							display_hash(char *name);
 
 #endif

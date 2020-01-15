@@ -19,8 +19,8 @@
 # include <math.h>
 
 # include "libft.h"
-# include "ft_md5.h"
-# include "ft_sha.h"
+// #include "ft_md5.h"
+// #include "ft_sha.h"
 
 /*
 **	COMMANDS
@@ -50,6 +50,12 @@
 
 # define SIZE_READ				1024
 
+static unsigned char			PADDING[64] = {
+	0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+};
+
 typedef struct					s_ssl
 {
 	char						*cmd;
@@ -66,6 +72,9 @@ typedef struct					s_hash
 	void 						(*func)(char **argv, int argc);
 	char 						*name;
 }								t_hash;
+
+void							record_sha(char **argv, int argc);
+void							record_md5(char **argv, int argc);
 
 static t_hash					g_hash[] =
 {
@@ -84,6 +93,23 @@ static t_hash					g_hash[] =
 t_ssl							*getssl(void);
 void							init_ssl(void);
 void							clean_ssl(void);
+
+/*
+**	Gestion MD5
+*/
+
+void							gestion_block(char *block, unsigned int size, int add);
+void							gestion_last_block(char *block, unsigned int size);
+void							display_hash(char *name);
+
+
+/*
+**	Gestion sha256
+*/
+
+void							gestion_block256(char *block, unsigned int size, int add);
+void							gestion_last_block256(char *block, unsigned int size);
+void							display_hash256(char *name);
 
 /*
 **	Reverse
@@ -122,7 +148,6 @@ void							print_sizeof(void);
 void							print_block(char *block);
 void							print_state(unsigned int state[4]);
 void							print_state_4int(int a, int b, int c, int d);
-void							print_sinus(void);
 void							print_info_func4(int a, int b, int c, int d, int x, int i, int s, int sin);
 void							print_info_func(unsigned int state[4], int x, int i, int s, int sin);
 
