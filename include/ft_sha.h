@@ -13,16 +13,28 @@
 #ifndef FT_SHA_H
 # define FT_SHA_H
 
-# define STATE00				0x6a09e667
-# define STATE11				0xbb67ae85
-# define STATE22				0x3c6ef372
-# define STATE33				0xa54ff53a
-# define STATE44				0x510e527f
-# define STATE55				0x9b05688c
-# define STATE66				0x1f83d9ab
-# define STATE77				0x5be0cd19
+# include <unistd.h>
 
-static uint32_t		g_kk[64] = {
+# define STATE0					0x6a09e667
+# define STATE1					0xbb67ae85
+# define STATE2					0x3c6ef372
+# define STATE3					0xa54ff53a
+# define STATE4					0x510e527f
+# define STATE5					0x9b05688c
+# define STATE6					0x1f83d9ab
+# define STATE7					0x5be0cd19
+
+# define STATE00				0xc1059ed8
+# define STATE11				0x367cd507
+# define STATE22				0x3070dd17
+# define STATE33				0xf70e5939
+# define STATE44				0xffc00b31
+# define STATE55				0x68581511
+# define STATE66				0x64f98fa7
+# define STATE77				0xbefa4fa4
+
+
+static uint32_t		g_k[64] = {
 	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1,
 	0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
 	0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
@@ -60,6 +72,9 @@ int					read_arguments_sha(char *arg);
 int					read_string256(char *str);
 int					read_string_option256(char *str);
 int					gestion_string256(char *str);
+
+void				init_state_sha224(uint32_t state[8]);
+void				init_state_sha256(uint32_t state[8]);
 
 /*
 **	Function structure sha

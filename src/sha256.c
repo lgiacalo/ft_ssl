@@ -63,7 +63,7 @@ void			sha_transform256(uint32_t *block)
 	while (++i < 64)
 	{
 		t1 = alp[7] + bsig1(alp[4]) + ch(alp[4], alp[5], alp[6])
-		+ g_kk[i] + w[i];
+		+ g_k[i] + w[i];
 		t2 = bsig0(alp[0]) + maj(alp[0], alp[1], alp[2]);
 		alp[7] = alp[6];
 		alp[6] = alp[5];

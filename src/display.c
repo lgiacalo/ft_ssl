@@ -67,5 +67,5 @@ void	display_hash256(char *name)
 		print_hash(sha->state, 8);
 	}
 	ft_printf("\n");
-	clean_ssl();
+	clean_sha();
 }

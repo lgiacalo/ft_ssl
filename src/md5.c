@@ -47,7 +47,7 @@ void			md5_transform(unsigned int *block)
 	i = -1;
 	while (++i < 64)
 	{
-		func = tmp[0] + func_block(tmp, i) + block[ind_block(i)] + k[i];
+		func = tmp[0] + func_block(tmp, i) + block[ind_block(i)] + g_k[i];
 		tmp[0] = tmp[3];
 		tmp[3] = tmp[2];
 		tmp[2] = tmp[1];
