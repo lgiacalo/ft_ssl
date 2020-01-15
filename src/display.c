@@ -49,22 +49,24 @@ void	display_hash(char *name)
 void	display_hash256(char *name)
 {
 	t_sha	*sha;
+	int		v;
 	char	c;
 
 	sha = getsha();
+	v = (sha->version) ? 8 : 7;
 	c = (sha->opt & OPT_S) ? '"' : 0;
 	if (sha->opt & OPT_Q)
-		print_hash(sha->state, 8);
+		print_hash(sha->state, v);
 	else if ((sha->opt & OPT_P) || (sha->opt & OPT_R))
 	{
-		print_hash(sha->state, 8);
+		print_hash(sha->state, v);
 		if (!(sha->opt & OPT_P))
 			ft_printf(" %c%s%c", c, name, c);
 	}
 	else
 	{
-		ft_printf("SHA256(%c%s%c)= ", c, name, c);
-		print_hash(sha->state, 8);
+		ft_printf("%s(%c%s%c)= ", sha->cmd, c, name, c);
+		print_hash(sha->state, v);
 	}
 	ft_printf("\n");
 	clean_sha();

@@ -22,7 +22,7 @@ for l in {1..10}; do
 		echo -n "\x$(printf %x ${arr[$i]})" >> $FILENAME
 	done
 
-	for cmd in {md5,sha256}; do
+	for cmd in {sha224,md5,sha256}; do
 		o_openssl=$(openssl $cmd $FILENAME)
 		o_ft_ssl_md5=$($ft_ssl_md5/ft_ssl $cmd $FILENAME)
 

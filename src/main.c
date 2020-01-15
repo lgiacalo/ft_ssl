@@ -27,6 +27,7 @@ int		record_commands(char *cmd)
 	if (ind < NB_HASH)
 	{
 		ssl->f = ind;
+		ft_strupcase(cmd);
 		return (0);
 	}
 	ssl->cmd = NULL;
