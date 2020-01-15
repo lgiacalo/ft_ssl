@@ -82,7 +82,7 @@ void			gestion_last_block256(char *block, unsigned int size)
 	int		mod;
 	int		div;
 
-	ft_printf("Gestion last block sha256\n");
+	// ft_printf("Gestion last block sha256\n");
 	sha = getsha();
 	mod = size % 64;
 	div = (size / 64) * 64;
@@ -107,7 +107,7 @@ void			gestion_block256(char *block, unsigned int size, int add)
 	t_sha			*sha;
 	unsigned int	i;
 
-	ft_printf("\nGestion block sha256 - size[%d]\n", size);
+	// ft_printf("\nGestion block sha256 - size[%d]\n", size);
 	sha = getsha();
 	sha->size += size;
 	i = 0;

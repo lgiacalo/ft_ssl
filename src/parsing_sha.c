@@ -19,7 +19,7 @@ static void	read_stdin_sha(char *buff)
 	size_t	size;
 	size_t	size_tt;
 
-	ft_printf("read stdin sha\n");
+	// ft_printf("read stdin sha\n");
 	size_tt = 0;
 	tmp = (char *)buff;
 	while ((size = read(0, tmp, SIZE_READ - size_tt)) >= 0)
@@ -27,7 +27,7 @@ static void	read_stdin_sha(char *buff)
 		size_tt += size;
 		if (size_tt == SIZE_READ || !size)
 		{
-			write(1, buff, size_tt);
+			// write(1, buff, size_tt);
 			gestion_block256(buff, size_tt, (!size) ? 63 : 0);
 			if (!size)
 			{
@@ -81,7 +81,7 @@ static int		record_option256(char *str)
 	return (0);
 }
 
-void	record_sha256(char **argv, int argc)
+void	record_sha(char **argv, int argc)
 {
 	int	i;
 	int	opt;

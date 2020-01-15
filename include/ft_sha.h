@@ -53,7 +53,7 @@ typedef struct					s_sha
 **	Prototypes
 */
 
-void				record_sha256(char **argv, int argc);
+void				record_sha(char **argv, int argc);
 int					read_arguments_sha(char *arg);
 
 int					read_string256(char *str);

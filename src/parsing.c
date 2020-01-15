@@ -25,7 +25,7 @@ void	read_stdin(char *buff)
 		size_tt += size;
 		if (size_tt == SIZE_READ || !size)
 		{
-			write(1, buff, size_tt);
+			// write(1, buff, size_tt);
 			gestion_block(buff, size_tt, (!size) ? 63 : 0);
 			if (!size)
 			{

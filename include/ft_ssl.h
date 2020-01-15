@@ -67,7 +67,7 @@ typedef struct					s_hash
 static t_hash					g_hash[] =
 {
 	{record_md5, "md5"},
-	{record_sha256, "sha256"},
+	{record_sha, "sha256"},
 	{NULL, NULL}
 };
 
