@@ -121,7 +121,6 @@ void							display_hash256(char *name);
 
 void							gestion_block512(char *block, uint64_t size, int add);
 void							gestion_last_block512(char *block, uint64_t size);
-// void							display_hash256(char *name);
 
 
 /*
@@ -130,6 +129,10 @@ void							gestion_last_block512(char *block, uint64_t size);
 
 uint32_t						rotate_left(uint32_t x, int n);
 uint32_t						rotate_right(uint32_t x, int n);
+uint64_t						rotate_left64(uint64_t x, int n);
+uint64_t						rotate_right64(uint64_t x, int n);
+
+
 
 uint64_t						reverse64(uint64_t block);
 uint32_t						reverse32(uint32_t block);

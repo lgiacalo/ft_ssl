@@ -33,24 +33,24 @@ uint64_t	majj(uint64_t x, uint64_t y, uint64_t z)
 
 uint64_t	bsig00(uint64_t x)
 {
-	return ((rotate_right(x, 28)) ^ (rotate_right(x, 34))
-		^ (rotate_right(x, 39)));
+	return ((rotate_right64(x, 28)) ^ (rotate_right64(x, 34))
+		^ (rotate_right64(x, 39)));
 }
 
 uint64_t	bsig11(uint64_t x)
 {
-	return ((rotate_right(x, 14)) ^ (rotate_right(x, 18))
-		^ (rotate_right(x, 41)));
+	return ((rotate_right64(x, 14)) ^ (rotate_right64(x, 18))
+		^ (rotate_right64(x, 41)));
 }
 
 uint64_t	ssig00(uint64_t x)
 {
-	return ((rotate_right(x, 1)) ^ (rotate_right(x, 8))
+	return ((rotate_right64(x, 1)) ^ (rotate_right64(x, 8))
 		^ ((x >> 7)));
 }
 
 uint64_t	ssig11(uint64_t x)
 {
-	return ((rotate_right(x, 19)) ^ (rotate_right(x, 61))
+	return ((rotate_right64(x, 19)) ^ (rotate_right64(x, 61))
 		^ ((x >> 6)));
 }

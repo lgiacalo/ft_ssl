@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "ft_sha.h"
 
 /*
 **	SHA
@@ -18,12 +19,22 @@
 
 int	gestion_string256(char *str)
 {
-	size_t	size;
+	uint64_t	size;
 
 	size = ft_strlen(str);
-	gestion_block256(str, size, 63);
-	gestion_last_block256(str, size);
-	display_hash256(str);
+	if (getsha()->len_msg == 64)
+	{
+		gestion_block256(str, size, 63);
+		gestion_last_block256(str, size);
+		display_hash256(str);
+	}
+	else
+	{
+		gestion_block512(str, size, 127);
+		gestion_last_block512(str, size);
+		display_hash256(str);
+	}
+
 	return (0);
 }
 

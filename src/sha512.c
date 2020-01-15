@@ -19,7 +19,7 @@ static void	message_schedule256(uint64_t *block, uint64_t w[80])
 
 	t = -1;
 	while (++t < 16)
-		w[t] = reverse32(block[t]);
+		w[t] = reverse64(block[t]);
 	t--;
 	while (++t < 80)
 		w[t] = ssig11(w[t - 2]) + w[t - 7] + ssig00(w[t - 15]) + w[t - 16];
@@ -55,8 +55,9 @@ void		sha_transform512(uint64_t *block)
 	uint64_t	t2;
 	uint8_t		i;
 
-	print_block128((char *)block);
+	// print_block128((char *)block);
 	message_schedule256(block, w);
+	// print_uint64_80(w);
 	init_work_variable256(alp);
 	i = -1;
 	while (++i < 80)
