@@ -79,6 +79,7 @@ typedef struct					s_sha
 	int							ret;
 	int							f;
 	uint32_t	 				state[8];
+	uint64_t	 				statee[8];
 	uint64_t 					size;
 	char						buf[128];
 	int							len_msg;

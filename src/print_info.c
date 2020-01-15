@@ -1,6 +1,27 @@
 #include "ft_ssl.h"
 #include "ft_sha.h"
 
+void	print_uint64_80(uint64_t w[80])
+{
+	ft_printf("\n*********** Structure: s_ssl **********\n");
+	for (int i = 0; i < 80; i++)
+	{
+		if (!(i % 8))
+			ft_printf("\n");
+		ft_printf("%s%#.16x ", (w[i]) ? "" : "0x", w[i]);
+	}
+	ft_printf("\n***************************************\n");
+}
+
+void	print_state_sha512(uint64_t state[8])
+{
+	ft_printf("\n******** Display State[8] SHA : ********\n");
+	for (int i = 0; i < 8; i++)
+		ft_printf("%c: %#.16x ", (int)('A') + i, state[i]);
+	// ft_printf("\n****************************************\n");
+	ft_printf("\n");
+}
+
 void	print_uint32_64(uint32_t w[64])
 {
 	ft_printf("\n*********** Structure: s_ssl **********\n");
@@ -60,6 +81,7 @@ void	print_sizeof(void)
 	ft_printf("Unsigned int:\t%u octets\n", sizeof(unsigned int));
 	ft_printf("Long int:\t%u octets\n", sizeof(long int));
 	ft_printf("Long long int:\t%u octets\n", sizeof(long long int));
+	ft_printf("Unsigned Long long int:\t%u octets\n", sizeof(unsigned long long int));
 	ft_printf("Size_t:\t\t%i octets\n", sizeof(size_t));
 	ft_printf("***************************************\n");
 }

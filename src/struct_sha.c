@@ -28,7 +28,9 @@ void	clean_sha(void)
 	if (sha->len_msg == 64)
 		sha->version
 	? init_state_sha256(sha->state) : init_state_sha224(sha->state);
-
+	if (sha->len_msg == 128)
+		sha->version
+	? init_state_sha512(sha->statee) : init_state_sha384(sha->statee);
 	sha->size = 0;
 	sha->opt &= 18;
 	ft_bzero(sha->buf, 128);
@@ -52,8 +54,12 @@ void	init_diff_sha(void)
 	{
 		sha->len_msg = 128;
 		sha->len_size = 16;
+		init_state_sha512(sha->statee);
 		if (num == 384)
+		{
 			sha->version = 0;
+			init_state_sha384(sha->statee);
+		}
 	}
 	return ;
 }

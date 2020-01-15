@@ -138,6 +138,10 @@ int								print_no_file(char *str);
 /*
 **	Print structure
 */
+void							print_uint64_80(uint64_t w[80]);
+void							print_state_sha512(uint64_t state[8]);
+
+
 
 void							print_uint32_64(uint32_t w[64]);
 void							print_state_sha256(unsigned int state[8]);

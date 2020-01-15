@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha256.c                                           :+:      :+:    :+:   */
+/*   sha512.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgiacalo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "ft_ssl.h"
 #include "ft_sha.h"
 
-static void	message_schedule256(uint32_t *block, uint32_t w[64])
+static void	message_schedule256(uint64_t *block, uint64_t w[64])
 {
 	int	t;
 
@@ -21,11 +21,11 @@ static void	message_schedule256(uint32_t *block, uint32_t w[64])
 	while (++t < 16)
 		w[t] = reverse32(block[t]);
 	t--;
-	while (++t < 64)
-		w[t] = ssig1(w[t - 2]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
+	while (++t < 80)
+		w[t] = ssig11(w[t - 2]) + w[t - 7] + ssig00(w[t - 15]) + w[t - 16];
 }
 
-static void	init_work_variable256(uint32_t alp[8])
+static void	init_work_variable256(uint64_t alp[8])
 {
 	t_sha	*sha;
 	int		i;
@@ -33,10 +33,10 @@ static void	init_work_variable256(uint32_t alp[8])
 	sha = getsha();
 	i = -1;
 	while (++i < 8)
-		alp[i] = sha->state[i];
+		alp[i] = sha->statee[i];
 }
 
-static void	compute_inter_hash(uint32_t alp[8])
+static void	compute_inter_hash(uint64_t alp[8])
 {
 	t_sha	*sha;
 	int		i;
@@ -44,25 +44,26 @@ static void	compute_inter_hash(uint32_t alp[8])
 	i = -1;
 	sha = getsha();
 	while (++i < 8)
-		sha->state[i] = sha->state[i] + alp[i];
+		sha->statee[i] = sha->statee[i] + alp[i];
 }
 
-void		sha_transform256(uint32_t *block)
+void		sha_transform512(uint64_t *block)
 {
-	uint32_t	w[64];
-	uint32_t	alp[8];
-	uint32_t	t1;
-	uint32_t	t2;
+	uint64_t	w[64];
+	uint64_t	alp[8];
+	uint64_t	t1;
+	uint64_t	t2;
 	uint8_t		i;
 
+	print_block((char *)block);
 	message_schedule256(block, w);
 	init_work_variable256(alp);
 	i = -1;
-	while (++i < 64)
+	while (++i < 80)
 	{
-		t1 = alp[7] + bsig1(alp[4]) + ch(alp[4], alp[5], alp[6])
+		t1 = alp[7] + bsig11(alp[4]) + chh(alp[4], alp[5], alp[6])
 		+ g_k[i] + w[i];
-		t2 = bsig0(alp[0]) + maj(alp[0], alp[1], alp[2]);
+		t2 = bsig00(alp[0]) + majj(alp[0], alp[1], alp[2]);
 		alp[7] = alp[6];
 		alp[6] = alp[5];
 		alp[5] = alp[4];
@@ -75,11 +76,11 @@ void		sha_transform256(uint32_t *block)
 	compute_inter_hash(alp);
 }
 
-void		gestion_last_block256(char *block, uint32_t size)
+void		gestion_last_block512(char *block, uint64_t size)
 {
 	t_sha		*sha;
-	uint32_t	mod;
-	uint32_t	div;
+	uint64_t	mod;
+	uint64_t	div;
 
 	sha = getsha();
 	mod = size % sha->len_msg;
@@ -88,27 +89,31 @@ void		gestion_last_block256(char *block, uint32_t size)
 	ft_memcpy(sha->buf + mod, PADDING, sha->len_msg - mod);
 	if (mod >= (sha->len_msg - sha->len_size))
 	{
-		sha_transform256((uint32_t *)(&(sha->buf[0])));
+		sha_transform512((uint64_t *)(&(sha->buf[0])));
 		ft_bzero(sha->buf, sha->len_msg);
 		ft_memcpy(sha->buf, PADDING + 1, (sha->len_msg - sha->len_size));
 	}
+	//TODO: gestion size * 8 --> trop grand ? 
 	sha->size *= 8;
-	sha->size = reverse64((uint32_t)sha->size);
+	//TODO: gestion reverse64 * 2
+	sha->size = reverse64(sha->size);
+	//TODO: gestion write size*2 in buff
 	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size), (unsigned char *)(&(sha->size)), sha->len_size);
-	sha_transform256((uint32_t *)(&(sha->buf[0])));
+	sha_transform512((uint64_t *)(&(sha->buf[0])));
 }
 
-void		gestion_block256(char *block, unsigned int size, int add)
+void		gestion_block512(char *block, unsigned int size, int add)
 {
 	t_sha		*sha;
-	uint32_t	i;
+	uint64_t	i;
 
 	sha = getsha();
+	//TODO: gestion size dans 2 variables
 	sha->size += size;
 	i = 0;
 	while ((i + ((add) ? sha->len_msg - 1 : 0)) < size)
 	{
-		sha_transform256((uint32_t *)(&(block[i])));
+		sha_transform512((uint64_t *)(&(block[i])));
 		i += sha->len_msg;
 	}
 }

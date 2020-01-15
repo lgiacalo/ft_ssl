@@ -21,6 +21,15 @@ CH (x, y, z) = (x ET y) XOR ((PAS x) ET z)
       SSIG1 (x) = ROTR ^ 19 (x) XOR ROTR ^ 61 (x) XOR SHR ^ 6 (x)
 */
 
+uint64_t	chh(uint64_t x, uint64_t y, uint64_t z)
+{
+	return (((x) & (y)) ^ ((~x) & (z)));
+}
+
+uint64_t	majj(uint64_t x, uint64_t y, uint64_t z)
+{
+	return (((x) & (y)) ^ ((x) & (z)) ^ ((y) & (z)));
+}
 
 uint64_t	bsig00(uint64_t x)
 {
