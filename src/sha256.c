@@ -106,7 +106,7 @@ void	gestion_block256(char *block, unsigned int size, int add)
 	sha = getsha();
 	sha->size += size;
 	i = 0;
-	while ((i + add) < size)
+	while ((i + ((add) ? sha->len_msg - 1 : 0)) < size)
 	{
 		sha_transform256((uint32_t *)(&(block[i])));
 		i += sha->len_msg;
