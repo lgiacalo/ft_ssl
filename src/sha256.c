@@ -94,7 +94,7 @@ void	gestion_last_block256(char *block, unsigned int size)
 	}
 	sha->size *= 8;
 	sha->size = reverse64(sha->size);
-	ft_memcpy(sha->buf + 56, (unsigned char *)(&(sha->size)), sha->len_size);
+	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size), (unsigned char *)(&(sha->size)), sha->len_size);
 	sha_transform256((unsigned int *)(&(sha->buf[0])));
 }
 
