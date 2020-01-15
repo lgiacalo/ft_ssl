@@ -36,7 +36,7 @@ uint32_t	reverse32(uint32_t block)
 	return (ret);
 }
 
-void			reverse32_block(uint32_t *block, int ind)
+void		reverse32_block(uint32_t *block, int ind)
 {
 	int	i;
 

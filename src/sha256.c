@@ -13,7 +13,7 @@
 #include "ft_ssl.h"
 #include "ft_sha.h"
 
-void			message_schedule256(uint32_t *block, uint32_t w[64])
+void	message_schedule256(uint32_t *block, uint32_t w[64])
 {
 	int	t;
 
@@ -25,7 +25,7 @@ void			message_schedule256(uint32_t *block, uint32_t w[64])
 		w[t] = ssig1(w[t - 2]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
 }
 
-void			init_work_variable256(uint32_t alp[8])
+void	init_work_variable256(uint32_t alp[8])
 {
 	t_sha	*sha;
 	int		i;
@@ -39,24 +39,22 @@ void			init_work_variable256(uint32_t alp[8])
 void	compute_inter_hash(uint32_t alp[8])
 {
 	t_sha	*sha;
-	int	i;
+	int		i;
 
-	i= -1;
+	i = -1;
 	sha = getsha();
 	while (++i < 8)
 		sha->state[i] = sha->state[i] + alp[i];
 }
 
-
-void			sha_transform256(uint32_t *block)
+void	sha_transform256(uint32_t *block)
 {
-	t_sha		*sha;
 	uint32_t	w[64];
 	uint32_t	alp[8];
-	uint32_t	t1, t2;
-	uint8_t 	i;
+	uint32_t	t1;
+	uint32_t	t2;
+	uint8_t		i;
 
-	sha = getsha();
 	message_schedule256(block, w);
 	init_work_variable256(alp);
 	i = -1;
@@ -77,13 +75,12 @@ void			sha_transform256(uint32_t *block)
 	compute_inter_hash(alp);
 }
 
-void			gestion_last_block256(char *block, unsigned int size)
+void	gestion_last_block256(char *block, unsigned int size)
 {
 	t_sha	*sha;
 	int		mod;
 	int		div;
 
-	// ft_printf("Gestion last block sha256\n");
 	sha = getsha();
 	mod = size % sha->len_msg;
 	div = (size / sha->len_msg) * sha->len_msg;
@@ -96,19 +93,16 @@ void			gestion_last_block256(char *block, unsigned int size)
 		ft_memcpy(sha->buf, PADDING + 1, (sha->len_msg - sha->len_size));
 	}
 	sha->size *= 8;
-
 	sha->size = reverse64(sha->size);
 	ft_memcpy(sha->buf + 56, (unsigned char *)(&(sha->size)), sha->len_size);
 	sha_transform256((unsigned int *)(&(sha->buf[0])));
-	// reverse32_block(sha->state, 8);
 }
 
-void			gestion_block256(char *block, unsigned int size, int add)
+void	gestion_block256(char *block, unsigned int size, int add)
 {
 	t_sha			*sha;
 	unsigned int	i;
 
-	// ft_printf("\nGestion block sha256 - size[%d]\n", size);
 	sha = getsha();
 	sha->size += size;
 	i = 0;
@@ -118,4 +112,3 @@ void			gestion_block256(char *block, unsigned int size, int add)
 		i += sha->len_msg;
 	}
 }
-
