@@ -82,8 +82,8 @@ typedef struct					s_sha
 	uint64_t	 				statee[8];
 	uint64_t 					size;
 	char						buf[128];
-	int							len_msg;
-	int							len_size;
+	uint32_t					len_msg;
+	uint32_t					len_size;
 }								t_sha;
 
 

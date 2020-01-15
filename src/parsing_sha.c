@@ -89,8 +89,6 @@ void		record_sha(char **argv, int argc)
 	i = 2;
 	opt = 1;
 	init_sha();
-	print_state_sha256(getsha()->state);
-	print_state_sha512(getsha()->statee);
 	while (i < argc)
 	{
 		if (opt && argv[i][0] == '-')
