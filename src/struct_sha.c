@@ -35,7 +35,28 @@ void	clean_sha(void)
 	sha->state[7] = STATE77;
 	sha->size = 0;
 	sha->opt &= 18;
-	ft_bzero(sha->buf, 64);
+	ft_bzero(sha->buf, 128);
+}
+
+void	init_diff_sha(void)
+{
+	t_sha	*sha;
+	int		num;
+
+	sha = getsha();
+	sha->version = 1;
+	sha->len_msg = 64;
+	sha->len_size = 8;
+	if ((num = ft_atoi(sha->cmd + 3)) == 224)
+		sha->version = 0;
+	else if (num != 256)
+	{
+		sha->len_msg = 128;
+		sha->len_size = 16;
+		if (num == 384)
+			sha->version = 0;
+	}
+	return ;
 }
 
 void	init_sha(void)
@@ -56,5 +77,6 @@ void	init_sha(void)
 	sha->state[6] = STATE66;
 	sha->state[7] = STATE77;
 	sha->size = 0;
-	ft_bzero(sha->buf, 64);
+	ft_bzero(sha->buf, 128);
+	init_diff_sha();
 }

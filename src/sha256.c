@@ -84,20 +84,20 @@ void			gestion_last_block256(char *block, unsigned int size)
 
 	// ft_printf("Gestion last block sha256\n");
 	sha = getsha();
-	mod = size % 64;
-	div = (size / 64) * 64;
+	mod = size % sha->len_msg;
+	div = (size / sha->len_msg) * sha->len_msg;
 	ft_memcpy(sha->buf, block + div, mod);
-	ft_memcpy(sha->buf + mod, PADDING, 64 - mod);
-	if (mod >= 56)
+	ft_memcpy(sha->buf + mod, PADDING, sha->len_msg - mod);
+	if (mod >= (sha->len_msg - sha->len_size))
 	{
 		sha_transform256((uint32_t *)(&(sha->buf[0])));
-		ft_bzero(sha->buf, 64);
-		ft_memcpy(sha->buf, PADDING + 1, 56);
+		ft_bzero(sha->buf, sha->len_msg);
+		ft_memcpy(sha->buf, PADDING + 1, (sha->len_msg - sha->len_size));
 	}
 	sha->size *= 8;
 
 	sha->size = reverse64(sha->size);
-	ft_memcpy(sha->buf + 56, (unsigned char *)(&(sha->size)), 8);
+	ft_memcpy(sha->buf + 56, (unsigned char *)(&(sha->size)), sha->len_size);
 	sha_transform256((unsigned int *)(&(sha->buf[0])));
 	// reverse32_block(sha->state, 8);
 }
@@ -114,7 +114,7 @@ void			gestion_block256(char *block, unsigned int size, int add)
 	while ((i + add) < size)
 	{
 		sha_transform256((uint32_t *)(&(block[i])));
-		i += 64;
+		i += sha->len_msg;
 	}
 }
 

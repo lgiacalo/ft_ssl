@@ -39,12 +39,15 @@ static uint32_t		g_kk[64] = {
 typedef struct					s_sha
 {
 	char						*cmd;
+	int							version;
 	int							opt;
 	int							ret;
 	int							f;
 	uint32_t	 				state[8];
 	uint64_t 					size;
-	char						buf[64];
+	char						buf[128];
+	int							len_msg;
+	int							len_size;
 }								t_sha;
 
 
