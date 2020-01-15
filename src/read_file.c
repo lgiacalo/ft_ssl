@@ -35,3 +35,26 @@ int	read_arguments(char *arg)
 	display_hash(arg);
 	return (0);
 }
+
+int	read_arguments_sha(char *arg)
+{
+	int		fd;
+	char	buff[SIZE_READ];
+	size_t	size;
+
+	if ((fd = open(arg, 'r')) == -1)
+		return (print_no_file(arg));
+	while ((size = read(fd, buff, SIZE_READ)) >= 0)
+	{
+		gestion_block256(buff, size, (size != SIZE_READ) ? 63 : 0);
+		if (size != SIZE_READ)
+		{
+			gestion_last_block256(buff, size);
+			break ;
+		}
+		ft_bzero(buff, SIZE_READ);
+	}
+	close(fd);
+	display_hash256(arg);
+	return (0);
+}

@@ -18,7 +18,7 @@ void			message_schedule256(uint32_t *block, uint32_t w[64])
 
 	t = -1;
 	while (++t < 16)
-		w[t] = reverse(block[t]);
+		w[t] = reverse32(block[t]);
 	t--;
 	while (++t < 64)
 		w[t] = ssig1(w[t - 2]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
@@ -99,7 +99,7 @@ void			gestion_last_block256(char *block, unsigned int size)
 	sha->size = reverse64(sha->size);
 	ft_memcpy(sha->buf + 56, (unsigned char *)(&(sha->size)), 8);
 	sha_transform256((unsigned int *)(&(sha->buf[0])));
-	// reverse_block(sha->state, 8);
+	// reverse32_block(sha->state, 8);
 }
 
 void			gestion_block256(char *block, unsigned int size, int add)

@@ -24,7 +24,7 @@ uint64_t	reverse64(uint64_t block)
 		| (block & 0xFF00000000000000UL) >> 56);
 }
 
-uint32_t	reverse(uint32_t block)
+uint32_t	reverse32(uint32_t block)
 {
 	uint32_t ret;
 
@@ -36,14 +36,14 @@ uint32_t	reverse(uint32_t block)
 	return (ret);
 }
 
-void			reverse_block(uint32_t *block, int ind)
+void			reverse32_block(uint32_t *block, int ind)
 {
 	int	i;
 
 	i = 0;
 	while (i < ind)
 	{
-		block[i] = reverse(block[i]);
+		block[i] = reverse32(block[i]);
 		i++;
 	}
 }

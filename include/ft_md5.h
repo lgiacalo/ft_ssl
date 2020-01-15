@@ -57,7 +57,7 @@ static unsigned int				k[64] = {
 void							record_md5(char **argv, int argc);
 int								record_option(char *str);
 
-int								read_string(char *str);
+int								read_string(char *str, int opt);
 int								read_string_option(char *str);
 int								gestion_string(char *str);
 

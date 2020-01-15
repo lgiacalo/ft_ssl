@@ -42,7 +42,7 @@ typedef struct					s_sha
 	int							opt;
 	int							ret;
 	int							f;
-	unsigned int 				state[8];
+	uint32_t	 				state[8];
 	uint64_t 					size;
 	char						buf[64];
 	// char						buff[SIZE_READ];
@@ -54,6 +54,11 @@ typedef struct					s_sha
 */
 
 void				record_sha256(char **argv, int argc);
+int					read_arguments_sha(char *arg);
+
+int					read_string256(char *str);
+int					read_string_option256(char *str);
+int					gestion_string256(char *str);
 
 /*
 **	Function structure sha

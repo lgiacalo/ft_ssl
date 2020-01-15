@@ -77,7 +77,7 @@ void			gestion_last_block(char *block, unsigned int size)
 	ssl->size *= 8;
 	ft_memcpy(ssl->buf + 56, (char *)(&(ssl->size)), 8);
 	md5_transform((unsigned int *)(&(ssl->buf[0])));
-	reverse_block(ssl->state, 4);
+	reverse32_block(ssl->state, 4);
 }
 
 void			gestion_block(char *block, unsigned int size, int add)

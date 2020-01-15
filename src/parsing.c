@@ -74,7 +74,7 @@ int		record_option(char *str)
 		if (str[i] == 'p')
 			gestion_stdin();
 		else if (str[i] == 's')
-			return (read_string_option(str + i));
+			return (read_string(str + i, 0));
 	}
 	return (0);
 }
@@ -91,7 +91,7 @@ void	record_md5(char **argv, int argc)
 		if (opt && argv[i][0] == '-')
 		{
 			if (record_option(argv[i]) == -1)
-				read_string(argv[++i]);
+				read_string(argv[++i], 1);
 		}
 		else
 		{

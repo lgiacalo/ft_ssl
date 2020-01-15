@@ -45,7 +45,7 @@
 **	Constantes
 */
 
-# define SIZE_READ				1024
+# define SIZE_READ				512
 
 typedef struct					s_ssl
 {
@@ -56,7 +56,6 @@ typedef struct					s_ssl
 	unsigned int 				state[4];
 	uint64_t 					size;
 	char						buf[64];
-	char						buff[SIZE_READ];
 }								t_ssl;
 
 typedef struct					s_hash
@@ -88,8 +87,8 @@ uint32_t						rotate_left(uint32_t x, int n);
 uint32_t						rotate_right(uint32_t x, int n);
 
 uint64_t						reverse64(uint64_t block);
-uint32_t						reverse(uint32_t block);
-void							reverse_block(uint32_t *block, int ind);
+uint32_t						reverse32(uint32_t block);
+void							reverse32_block(uint32_t *block, int ind);
 
 /*
 **	Print Error

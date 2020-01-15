@@ -12,6 +12,42 @@
 
 #include "ft_ssl.h"
 
+/*
+**	SHA
+*/
+
+int	gestion_string256(char *str)
+{
+	size_t	size;
+
+	size = ft_strlen(str);
+	gestion_block256(str, size, 63);
+	gestion_last_block256(str, size);
+	display_hash256(str);
+	return (0);
+}
+
+int	read_string_option256(char *str)
+{
+	if (str && !(str[1]))
+		return (-1);
+	else
+		gestion_string256(str + 1);
+	return (0);
+}
+
+int	read_string256(char *str)
+{
+	if (!str)
+		return (print_requires_args('s'));
+	gestion_string256(str);
+	return (0);
+}
+
+/*
+**	MD5
+*/
+
 int	gestion_string(char *str)
 {
 	size_t	size;
@@ -23,19 +59,20 @@ int	gestion_string(char *str)
 	return (0);
 }
 
-int	read_string_option(char *str)
+int	read_string(char *str, int opt)
 {
-	if (str && !(str[1]))
-		return (-1);
+	if (opt)
+	{
+		if (!str)
+			return (print_requires_args('s'));
+		gestion_string(str);
+	}
 	else
-		gestion_string(str + 1);
-	return (0);
-}
-
-int	read_string(char *str)
-{
-	if (!str)
-		return (print_requires_args('s'));
-	gestion_string(str);
+	{
+		if (str && !(str[1]))
+			return (-1);
+		else
+			gestion_string(str + 1);
+	}
 	return (0);
 }
