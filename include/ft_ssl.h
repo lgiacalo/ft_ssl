@@ -111,8 +111,18 @@ void							display_hash(char *name);
 */
 
 void							gestion_block256(char *block, unsigned int size, int add);
-void							gestion_last_block256(char *block, unsigned int size);
+void							gestion_last_block256(char *block, uint32_t size);
 void							display_hash256(char *name);
+
+
+/*
+**	Gestion sha512
+*/
+
+void							gestion_block512(char *block, uint64_t size, int add);
+void							gestion_last_block512(char *block, uint64_t size);
+// void							display_hash256(char *name);
+
 
 /*
 **	Reverse

@@ -13,7 +13,7 @@
 #include "ft_ssl.h"
 #include "ft_sha.h"
 
-static void	message_schedule256(uint64_t *block, uint64_t w[64])
+static void	message_schedule256(uint64_t *block, uint64_t w[80])
 {
 	int	t;
 
@@ -49,20 +49,20 @@ static void	compute_inter_hash(uint64_t alp[8])
 
 void		sha_transform512(uint64_t *block)
 {
-	uint64_t	w[64];
+	uint64_t	w[80];
 	uint64_t	alp[8];
 	uint64_t	t1;
 	uint64_t	t2;
 	uint8_t		i;
 
-	print_block((char *)block);
+	print_block128((char *)block);
 	message_schedule256(block, w);
 	init_work_variable256(alp);
 	i = -1;
 	while (++i < 80)
 	{
 		t1 = alp[7] + bsig11(alp[4]) + chh(alp[4], alp[5], alp[6])
-		+ g_k[i] + w[i];
+		+ g_kk[i] + w[i];
 		t2 = bsig00(alp[0]) + majj(alp[0], alp[1], alp[2]);
 		alp[7] = alp[6];
 		alp[6] = alp[5];
@@ -97,12 +97,12 @@ void		gestion_last_block512(char *block, uint64_t size)
 	sha->size *= 8;
 	//TODO: gestion reverse64 * 2
 	sha->size = reverse64(sha->size);
-	//TODO: gestion write size*2 in buff
-	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size), (unsigned char *)(&(sha->size)), sha->len_size);
+	//TODO: gestion write size*2 in buff // retirer les 8
+	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size + 8), (unsigned char *)(&(sha->size)), sha->len_size - 8);
 	sha_transform512((uint64_t *)(&(sha->buf[0])));
 }
 
-void		gestion_block512(char *block, unsigned int size, int add)
+void		gestion_block512(char *block, uint64_t size, int add)
 {
 	t_sha		*sha;
 	uint64_t	i;
