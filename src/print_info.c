@@ -15,7 +15,7 @@ void	print_uint64_80(uint64_t w[80])
 
 void	print_state_sha512(uint64_t state[8])
 {
-	ft_printf("\n******** Display State[8] SHA : ********\n");
+	ft_printf("\n******** Display State[8] SHA 512: ********\n");
 	for (int i = 0; i < 8; i++)
 		ft_printf("%c: %#.16x ", (int)('A') + i, state[i]);
 	// ft_printf("\n****************************************\n");
@@ -103,7 +103,7 @@ void	print_block(char *block)
 
 void	print_state_sha256(unsigned int state[8])
 {
-	ft_printf("\n******** Display State[8] SHA : ********\n");
+	ft_printf("\n******** Display State[8] SHA 256: ********\n");
 	for (int i = 0; i < 8; i++)
 		ft_printf("%c: %#.8x ", (int)('A') + i, state[i]);
 	// ft_printf("\n****************************************\n");

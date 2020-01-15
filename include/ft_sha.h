@@ -123,4 +123,12 @@ uint32_t			bsig1(uint32_t x);
 uint32_t			ssig0(uint32_t x);
 uint32_t			ssig1(uint32_t x);
 
+uint64_t			chh(uint64_t x, uint64_t y, uint64_t z);
+uint64_t			majj(uint64_t x, uint64_t y, uint64_t z);
+uint64_t			bsig00(uint64_t x);
+uint64_t			bsig11(uint64_t x);
+uint64_t			ssig00(uint64_t x);
+uint64_t			ssig11(uint64_t x);
+
+
 #endif
