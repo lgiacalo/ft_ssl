@@ -28,6 +28,7 @@ void	clean_sha(void)
 	if (sha->len_msg == 64)
 		sha->version
 	? init_state_sha256(sha->state) : init_state_sha224(sha->state);
+
 	sha->size = 0;
 	sha->opt &= 18;
 	ft_bzero(sha->buf, 128);
