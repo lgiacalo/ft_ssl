@@ -14,7 +14,6 @@
 #include "ft_sha.h"
 #include <fcntl.h>
 
-
 static void	read_stdin_sha(char *b, int p)
 {
 	char	*tmp;
@@ -51,7 +50,7 @@ static int	gestion_stdin_sha(int p)
 
 	sha = getsha();
 	if (sha->opt & OPT_PP)
-		return (gestion_string256("")); //ici
+		return (gestion_string256(""));
 	sha->opt |= (1 << 4);
 	sha->opt |= (1 << 0);
 	(sha->len_msg == 64) ? read_stdin_sha(buff, p) : read_stdin_sha512(buff, p);
@@ -90,8 +89,6 @@ void		record_sha(char **argv, int argc)
 	i = 2;
 	opt = 1;
 	init_sha();
-	// print_state_sha256(getsha()->state);
-	// print_state_sha512(getsha()->statee);
 	while (i < argc)
 	{
 		if (opt && argv[i][0] == '-')

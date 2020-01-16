@@ -51,14 +51,14 @@ void			md5_transform(unsigned int *block)
 		tmp[0] = tmp[3];
 		tmp[3] = tmp[2];
 		tmp[2] = tmp[1];
-		tmp[1] = tmp[1] + rotate_left(func, r[i]);
+		tmp[1] = tmp[1] + rotate_left(func, g_r[i]);
 	}
 	i = -1;
 	while (++i < 4)
 		ssl->state[i] += tmp[i];
 }
 
-void			gestion_last_block(char *block, unsigned int size)
+void			gestion_last_block(char *block, uint64_t size)
 {
 	t_ssl	*ssl;
 	int		mod;
@@ -81,7 +81,7 @@ void			gestion_last_block(char *block, unsigned int size)
 	reverse32_block(ssl->state, 4);
 }
 
-void			gestion_block(char *block, unsigned int size, int add)
+void			gestion_block(char *block, uint64_t size, int add)
 {
 	t_ssl			*ssl;
 	unsigned int	i;

@@ -13,18 +13,6 @@
 #include "ft_ssl.h"
 #include "ft_sha.h"
 
-static void	message_schedule256(uint32_t *block, uint32_t w[64])
-{
-	int	t;
-
-	t = -1;
-	while (++t < 16)
-		w[t] = reverse32(block[t]);
-	t--;
-	while (++t < 64)
-		w[t] = ssig1(w[t - 2]) + w[t - 7] + ssig0(w[t - 15]) + w[t - 16];
-}
-
 static void	init_work_variable256(uint32_t alp[8])
 {
 	t_sha	*sha;
@@ -94,7 +82,8 @@ void		gestion_last_block256(char *block, uint32_t size)
 	}
 	sha->size *= 8;
 	sha->size = reverse64((uint32_t)sha->size);
-	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size), (unsigned char *)(&(sha->size)), sha->len_size);
+	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size),
+		(unsigned char *)(&(sha->size)), sha->len_size);
 	sha_transform256((uint32_t *)(&(sha->buf[0])));
 }
 

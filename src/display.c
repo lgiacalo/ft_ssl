@@ -18,7 +18,6 @@ void	print_hash(unsigned int state[], int ind, int type)
 	int	i;
 
 	i = -1;
-
 	if (type || getsha()->len_msg == 64)
 	{
 		while (++i < ind)

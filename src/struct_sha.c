@@ -32,6 +32,7 @@ void	clean_sha(void)
 		sha->version
 	? init_state_sha512(sha->statee) : init_state_sha384(sha->statee);
 	sha->size = 0;
+	sha->size1 = 0;
 	sha->opt &= 18;
 	ft_bzero(sha->buf, 128);
 }
@@ -75,6 +76,7 @@ void	init_sha(void)
 	sha->f = getssl()->f;
 	init_state_sha256(sha->state);
 	sha->size = 0;
+	sha->size1 = 0;
 	ft_bzero(sha->buf, 128);
 	init_diff_sha();
 }

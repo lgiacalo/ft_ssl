@@ -34,7 +34,6 @@ int	gestion_string256(char *str)
 		gestion_last_block512(str, size);
 		display_hash256(str);
 	}
-
 	return (0);
 }
 
