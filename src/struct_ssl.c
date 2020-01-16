@@ -25,6 +25,7 @@ void	clean_ssl(void)
 	t_ssl	*ssl;
 
 	ssl = getssl();
+	ssl->ret = 0;
 	ssl->state[0] = STATE0;
 	ssl->state[1] = STATE1;
 	ssl->state[2] = STATE2;

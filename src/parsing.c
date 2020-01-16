@@ -100,6 +100,8 @@ void	record_md5(char **argv, int argc)
 			read_arguments(argv[i]);
 		}
 		i++;
+		if (getssl()->ret)
+			break ;
 	}
 	if (argc == 2)
 		gestion_stdin(0);

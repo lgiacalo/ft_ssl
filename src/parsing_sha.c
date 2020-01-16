@@ -101,6 +101,8 @@ void		record_sha(char **argv, int argc)
 			opt = 0;
 			read_arguments_sha(argv[i]);
 		}
+		if (getsha()->ret)
+			break ;
 		i++;
 	}
 	if (argc == 2)
