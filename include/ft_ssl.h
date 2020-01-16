@@ -101,8 +101,8 @@ void							clean_ssl(void);
 **	Gestion MD5
 */
 
-void							gestion_block(char *block, unsigned int size, int add);
-void							gestion_last_block(char *block, unsigned int size);
+void							gestion_block(char *block, uint64_t size, int add);
+void							gestion_last_block(char *block, uint64_t size);
 void							display_hash(char *name);
 
 
@@ -112,6 +112,7 @@ void							display_hash(char *name);
 
 void							gestion_block256(char *block, unsigned int size, int add);
 void							gestion_last_block256(char *block, uint32_t size);
+void							message_schedule256(uint32_t *block, uint32_t w[64]);
 void							display_hash256(char *name);
 
 
@@ -121,7 +122,7 @@ void							display_hash256(char *name);
 
 void							gestion_block512(char *block, uint64_t size, int add);
 void							gestion_last_block512(char *block, uint64_t size);
-
+void							message_schedule512(uint64_t *block, uint64_t w[80]);
 
 /*
 **	Reverse
