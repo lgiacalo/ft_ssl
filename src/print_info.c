@@ -89,21 +89,21 @@ void	print_ssl(void)
 	ft_printf("***************************************\n");
 }
 
-void	print_sizeof(void)
-{
-	ft_printf("\n**************** Sizeof ***************\n");
-	ft_printf("Char:\t\t%u octet\n", sizeof(char));
-	ft_printf("Char*:\t\t%u octets\n", sizeof(char*));
-	ft_printf("Short:\t\t%u octets\n", sizeof(short));
-	ft_printf("Int:\t\t%u octets\n", sizeof(int));
-	ft_printf("Int*:\t\t%u octets\n", sizeof(int*));
-	ft_printf("Unsigned int:\t%u octets\n", sizeof(unsigned int));
-	ft_printf("Long int:\t%u octets\n", sizeof(long int));
-	ft_printf("Long long int:\t%u octets\n", sizeof(long long int));
-	ft_printf("Unsigned Long long int:\t%u octets\n", sizeof(unsigned long long int));
-	ft_printf("Size_t:\t\t%i octets\n", sizeof(size_t));
-	ft_printf("***************************************\n");
-}
+// void	print_sizeof(void)
+// {
+// 	ft_printf("\n**************** Sizeof ***************\n");
+// 	ft_printf("Char:\t\t%u octet\n", sizeof(char));
+// 	ft_printf("Char*:\t\t%u octets\n", sizeof(char*));
+// 	ft_printf("Short:\t\t%u octets\n", sizeof(short));
+// 	ft_printf("Int:\t\t%u octets\n", sizeof(int));
+// 	ft_printf("Int*:\t\t%u octets\n", sizeof(int*));
+// 	ft_printf("Unsigned int:\t%u octets\n", sizeof(unsigned int));
+// 	ft_printf("Long int:\t%u octets\n", sizeof(long int));
+// 	ft_printf("Long long int:\t%u octets\n", sizeof(long long int));
+// 	ft_printf("Unsigned Long long int:\t%u octets\n", sizeof(unsigned long long int));
+// 	ft_printf("Size_t:\t\t%i octets\n", sizeof(size_t));
+// 	ft_printf("***************************************\n");
+// }
 
 void	print_block(char *block)
 {

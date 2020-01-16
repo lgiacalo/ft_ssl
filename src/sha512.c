@@ -73,12 +73,12 @@ void		gestion_last_block512(char *block, uint64_t size)
 	mod = size % sha->len_msg;
 	div = (size / sha->len_msg) * sha->len_msg;
 	ft_memcpy(sha->buf, block + div, mod);
-	ft_memcpy(sha->buf + mod, PADDING, sha->len_msg - mod);
+	ft_memcpy(sha->buf + mod, g_pad, sha->len_msg - mod);
 	if (mod >= (sha->len_msg - sha->len_size))
 	{
 		sha_transform512((uint64_t *)(&(sha->buf[0])));
 		ft_bzero(sha->buf, sha->len_msg);
-		ft_memcpy(sha->buf, PADDING + 1, (sha->len_msg - sha->len_size));
+		ft_memcpy(sha->buf, g_pad + 1, (sha->len_msg - sha->len_size));
 	}
 	sha->size = reverse64(sha->size);
 	sha->size1 = reverse64(sha->size1);

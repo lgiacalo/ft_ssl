@@ -68,12 +68,12 @@ void			gestion_last_block(char *block, uint64_t size)
 	mod = size % 64;
 	div = (size / 64) * 64;
 	ft_memcpy(ssl->buf, block + div, mod);
-	ft_memcpy(ssl->buf + mod, PADDING, 64 - mod);
+	ft_memcpy(ssl->buf + mod, g_pad, 64 - mod);
 	if (mod >= 56)
 	{
 		md5_transform((unsigned int *)(&(ssl->buf[0])));
 		ft_bzero(ssl->buf, 64);
-		ft_memcpy(ssl->buf, PADDING + 1, 56);
+		ft_memcpy(ssl->buf, g_pad + 1, 56);
 	}
 	ssl->size *= 8;
 	ft_memcpy(ssl->buf + 56, (char *)(&(ssl->size)), 8);
