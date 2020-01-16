@@ -47,10 +47,13 @@ int	read_arguments_sha(char *arg)
 		return (print_no_file(arg));
 	while ((size = read(fd, buff, SIZE_READ)) >= 0)
 	{
-		gestion_block256(buff, size, (size != SIZE_READ) ? 63 : 0);
+		getsha()->len_msg == 64 ?
+		gestion_block256(buff, size, (size != SIZE_READ) ? 63 : 0)
+		: gestion_block512(buff, size, (size != SIZE_READ) ? 127 : 0);
 		if (size != SIZE_READ)
 		{
-			gestion_last_block256(buff, size);
+			getsha()->len_msg == 64 ? gestion_last_block256(buff, size)
+			: gestion_last_block512(buff, size);
 			break ;
 		}
 		ft_bzero(buff, SIZE_READ);
