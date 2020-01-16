@@ -58,7 +58,7 @@ void			md5_transform(unsigned int *block)
 		ssl->state[i] += tmp[i];
 }
 
-void			gestion_last_block(char *block, uint64_t size)
+void			gestion_last_block(char *block, uint32_t size)
 {
 	t_ssl	*ssl;
 	int		mod;
@@ -75,19 +75,18 @@ void			gestion_last_block(char *block, uint64_t size)
 		ft_bzero(ssl->buf, 64);
 		ft_memcpy(ssl->buf, g_pad + 1, 56);
 	}
-	ssl->size *= 8;
 	ft_memcpy(ssl->buf + 56, (char *)(&(ssl->size)), 8);
 	md5_transform((unsigned int *)(&(ssl->buf[0])));
 	reverse32_block(ssl->state, 4);
 }
 
-void			gestion_block(char *block, uint64_t size, int add)
+void			gestion_block(char *block, uint32_t size, int add)
 {
 	t_ssl			*ssl;
 	unsigned int	i;
 
 	ssl = getssl();
-	ssl->size += size;
+	ssl->size += size * 8;
 	i = 0;
 	while ((i + add) < size)
 	{

@@ -63,7 +63,7 @@ void		sha_transform256(uint32_t *block)
 	compute_inter_hash(alp);
 }
 
-void		gestion_last_block256(char *block, uint32_t size)
+void		gestion_last_block256(char *block, uint64_t size)
 {
 	t_sha		*sha;
 	uint32_t	mod;
@@ -80,20 +80,19 @@ void		gestion_last_block256(char *block, uint32_t size)
 		ft_bzero(sha->buf, sha->len_msg);
 		ft_memcpy(sha->buf, g_pad + 1, (sha->len_msg - sha->len_size));
 	}
-	sha->size *= 8;
-	sha->size = reverse64((uint32_t)sha->size);
+	sha->size = reverse64(sha->size);
 	ft_memcpy(sha->buf + (sha->len_msg - sha->len_size),
 		(unsigned char *)(&(sha->size)), sha->len_size);
 	sha_transform256((uint32_t *)(&(sha->buf[0])));
 }
 
-void		gestion_block256(char *block, unsigned int size, int add)
+void		gestion_block256(char *block, uint64_t size, int add)
 {
 	t_sha		*sha;
 	uint32_t	i;
 
 	sha = getsha();
-	sha->size += size;
+	sha->size += size * 8;
 	i = 0;
 	while ((i + ((add) ? sha->len_msg - 1 : 0)) < size)
 	{
