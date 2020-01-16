@@ -25,6 +25,7 @@ void	clean_sha(void)
 	t_sha	*sha;
 
 	sha = getsha();
+	getssl()->nb += sha->ret;
 	sha->ret = 0;
 	if (sha->len_msg == 64)
 		sha->version

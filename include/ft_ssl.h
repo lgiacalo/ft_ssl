@@ -67,6 +67,7 @@ typedef struct			s_ssl
 	unsigned int		state[4];
 	uint64_t			size;
 	char				buf[64];
+	int					nb;
 }						t_ssl;
 
 typedef struct			s_hash
@@ -144,6 +145,14 @@ int						print_usage_commands(char *cmd);
 int						print_illegal_option(char opt);
 int						print_requires_args(char opt);
 int						print_no_file(char *str);
+
+/*
+**	Utils
+*/
+
+int						tab_len(char **tab);
+void					free_tab(char ***tab);
+
 
 /*
 **	Print structure
