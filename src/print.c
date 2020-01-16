@@ -17,6 +17,7 @@ int	print_no_file(char *str)
 {
 	ft_printf("ft_ssl: %s: No such file or directory\n", str);
 	getssl()->ret = 1;
+	getssl()->nb += 1;
 	return (0);
 }
 
@@ -25,6 +26,7 @@ int	print_requires_args(char opt)
 	ft_printf("ft_ssl: option requires an argument -- %c\n", opt);
 	print_usage();
 	getssl()->ret = 1;
+	getssl()->nb += 1;
 	return (1);
 }
 
@@ -33,6 +35,7 @@ int	print_illegal_option(char opt)
 	ft_printf("ft_ssl: illegal option -- %c\n", opt);
 	print_usage();
 	getssl()->ret = 1;
+	getssl()->nb += 1;
 	return (1);
 }
 
@@ -49,5 +52,6 @@ int	print_usage_commands(char *cmd)
 	ft_printf("Message Digest commands:\n");
 	ft_printf("md5\nsha224\nsha256\nsha384\nsha512\n\n");
 	ft_printf("Cipher commands:\n");
+	getssl()->nb += 1;
 	return (1);
 }

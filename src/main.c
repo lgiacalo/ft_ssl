@@ -34,7 +34,6 @@ int		record_commands(char *cmd)
 	return (1);
 }
 
-
 int		ssl(int argc, char **argv)
 {
 	init_ssl();
@@ -93,6 +92,5 @@ int		main(int argc, char **argv)
 	}
 	else
 		ssl(argc, argv);
-	ft_printf("nb=[%d]\n", getssl()->nb);
 	return (getssl()->nb ? 1 : 0);
 }

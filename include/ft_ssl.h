@@ -153,7 +153,6 @@ int						print_no_file(char *str);
 int						tab_len(char **tab);
 void					free_tab(char ***tab);
 
-
 /*
 **	Print structure
 */

@@ -18,5 +18,3 @@ Size_t:		8 octets
 	struct stat	st_buf;
 	fstat(fd, &st_buf);
 	ft_printf("Taille fichier : [%d]\n\n", st_buf.st_size);
-
-- prevoir fichier trop gros ! 
