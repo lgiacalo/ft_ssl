@@ -22,7 +22,7 @@ int		record_commands(char *cmd)
 	ssl->cmd = cmd;
 	s = ft_strlowcase(cmd);
 	ind = 0;
-	while (g_hash[ind].func && strcmp(s, g_hash[ind].name))
+	while (g_hash[ind].func && ft_strcmp(s, g_hash[ind].name))
 		ind++;
 	if (ind < NB_HASH)
 	{
