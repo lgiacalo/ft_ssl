@@ -1,7 +1,5 @@
 # FT_SSL
 
-(42 School Project)
-
 **ft_ssl_md5** is the first project in cryptographic branch of 42 School projects.
 
 The goal is to create a program (written in C) that will combine functionality of **md5**, **openssl** and **shasum** Unix programs.
